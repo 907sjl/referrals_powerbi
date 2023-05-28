@@ -51,4 +51,4 @@ The process timing measures consider a referral scheduled if either the referral
 
 An additional test compares the number of patients referenced in Direct Secure Messages to those who have a referral to the clinic. Patients seen as a result of DSMs would need a referral if they are to be included in this report.  
 
-< [Portfolio](/) | [Full Report](/pdf/Referral%20Wait%20Time.pdf) | [Bokeh project](/) | [Power BI project](/) 
+< [Portfolio](/) | [Full Report](/pdf/Referral%20Wait%20Time.pdf) | [Bokeh project](/) | [Power BI project](https://907sjl.github.io/referrals_powerbi/) 
