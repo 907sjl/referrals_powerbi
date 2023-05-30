@@ -7,8 +7,8 @@ This project is an example of a report that I created to look at the process tim
 Click [here](https://907sjl.github.io/referrals_powerbi/referrals_report) for an overview of the report.  The numerical values in these reports are fabricated and do not represent any real healthcare organization. 
 
 ### Contents
-- [The Power Query ELT](#Power-Query-ELT)
-- [The Power BI data model](#Power-BI-Data-Model)
+- [The Power Query ELT](#power-query-elt)
+- [The Power BI data model](#power-bi-data-model)
 
 f
 
