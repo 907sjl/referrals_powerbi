@@ -24,7 +24,7 @@ For the purposes of demonstration this example report loads data from three Comm
 : Contains the data for the standard date dimension table used across reports.     
 
 ### Power Query ELT
-**Groups** 
+Groups     
 ![A list of Power Query groups](images/query_groups.jpg)
 
 ### Power BI Data Model 
