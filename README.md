@@ -31,8 +31,8 @@ Four custom groups and the one default group organize the Power Query loads, tra
 ![Contents of the parameters group](images/parameters_group.jpg)    
 Parameters are used here for two purposes.  The **data_date** parameter is used to fix the effective date of this report to a specific date.  Many of the measures in this report are based on the age of a referral.  Since this example is loaded from static files the age must be constrained in order to avoid every referral aging out of range.
 
-The **data_path** parameter provides a single, convenient location to set the directory where the report can find the data files to load.  The *Source* step of each source table references this parameter along with one of the other parameters containing the name of the file to load.    
 ![Snapshot of the file Source configuration](images/file_path_parts.jpg)    
+The **data_path** parameter provides a single, convenient location to set the directory where the report can find the data files to load.  The *Source* step of each source table references this parameter along with one of the other parameters containing the name of the file to load.    
 
  
 ### Power BI Data Model 
