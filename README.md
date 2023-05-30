@@ -26,7 +26,13 @@ For the purposes of demonstration this example report loads data from three Comm
 ### Power Query ELT
 Groups     
 ![A list of Power Query groups](images/query_groups.jpg)
+Four custom groups and the one default group organize the Power Query loads, transforms, and ancillary constructs. 
 
+![Contents of the parameters group](images/parameters_group.jpg)
+Parameters are used here for two purposes.  The **data_path** parameter provides a single, convenient location to set the directory where the report can find the data files to load.  The *Source* step of each source table load references this parameter along with one of the other parameters containing the name of the file to load. 
+![Snapshot of the file Source configuration](images/file_path_parts.jpg)
+
+ 
 ### Power BI Data Model 
 
 h
