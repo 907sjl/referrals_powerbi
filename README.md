@@ -14,13 +14,13 @@ Click [here](https://907sjl.github.io/referrals_powerbi/referrals_report) for an
 ### Data sources 
 For the purposes of demonstration this example report loads data from three Comma Separated Values files.  The data in these files has been fabricated as an example.  It does not represent any real healthcare organization.   
 
-Referrals.csv
+- Referrals.csv
 : A file containing one row for each referral and columns with the dates when each referral reached a process milestone.  Other columns are also included that are helpful for monthly monitoring.    
 
-DirectSecureMessages.csv
+- DirectSecureMessages.csv
 : A file containing one row for each Direct Secure Message about a patient that was sent to a referral inbox. These are used to measure how often messages are used in place of referrals.     
 
-StandardCalendar.csv
+- StandardCalendar.csv
 : Contains the data for the standard date dimension table used across reports.     
 
 ### Power Query ELT
