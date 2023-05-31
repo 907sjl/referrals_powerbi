@@ -42,7 +42,7 @@ The **data_date** parameter is used to calculate the number of days that a refer
 The **data_path** parameter provides a single, convenient location to set the directory where the report can find the data files to load.  The *Source* step of each source table references this parameter along with one of the other parameters containing the name of the file to load.    
 
 ![Contents of the functions group](images/functions_group.jpg)    
-This report makes use of the GetAgeCategory function to template a column transform that is used multiple times.  It assigns a distribution grouping to the number of days leading up to a process milestone.    
+This report makes use of the **GetAgeCategory** function to template a column transform that is used multiple times.  It assigns a distribution grouping to the number of days leading up to a process milestone.    
 
 ```
 = (Days as any) as any => 
@@ -58,6 +58,18 @@ in
 ```
 
 The number of days is the parameter and the return value is the grouping category.      
+
+![Contents of the data loads group](images/data_loads_group.jpg)    
+The Data Loads group contains the extracts and loads from the source data files.  **Referral**, **Direct Secure Message**, and **Standard Calendar** each refer to the similarly named CSV file data source.  
+ 
+![Referral Milestone query steps](images/referral_milestone_steps.jpg)    
+**Referral Milestone** is a pivoted transformation of the referral process milestone dates into a vertical fact table rather than a horizontal list of milestone based attributes.  Doing so grants the ability to filter visuals on specific milestones and apply the same measure across one or more selected milestones.    
+The transforms:
+1. Reference the source **Referrals** table
+2. Select the columns that are relevant for this table
+3. Unpivot from a horizontal list of milestone dates and times to a vertical list
+4. Tag each milestone wait time with an age category (using the **GetAgeCategory** function)
+5. Clean up the source file naming and data types
 
 ### Power BI Data Model 
 
