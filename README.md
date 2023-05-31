@@ -41,7 +41,24 @@ The **data_date** parameter is used to calculate the number of days that a refer
 ![Snapshot of the file Source configuration](images/file_path_parts.jpg)    
 The **data_path** parameter provides a single, convenient location to set the directory where the report can find the data files to load.  The *Source* step of each source table references this parameter along with one of the other parameters containing the name of the file to load.    
 
- 
+![Contents of the functions group](images/functions_group.jpg)    
+This report makes use of the GetAgeCategory function to template a column transform that is used multiple times.  It assigns a distribution grouping to the number of days leading up to a process milestone.    
+
+```
+= (Days as any) as any => 
+let
+    Source = (if Days = null then null 
+              else if Days <= 7 then "7d" 
+              else if Days <= 14 then "14d" 
+              else if Days <= 30 then "30d" 
+              else if Days <= 60 then "60d" 
+              else if Days <= 90 then "90d" else ">90d")
+in
+    Source
+```
+
+The number of days is the parameter and the return value is the grouping category.      
+
 ### Power BI Data Model 
 
 h
