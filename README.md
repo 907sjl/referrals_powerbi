@@ -4,7 +4,7 @@ One way to measure access to care is timeliness.  Long delays to see a healthcar
 This project is an example of a report that I created to look at the process times for referred patients at specialty clinics. 
 
 ### Why Power BI? 
-Why would I choose Power BI to create this report?  Power BI reports are both quick to manipulate and page formatted.  The combination of Power Query M Scripts and DAX measure calculations makes Power BI extremely nimble, as does the visual design interface for building reports.  There is a plethora of community support and freely accessible training for those who are new to Power BI.  A dashboard created in Power BI can also function as a page formatted report.  If you are faced with a typical business intelligence, iterative reprototyping scenario where exploratory analysis is refined into repeatable process measurement then Power BI is a good choice.    
+Why would I choose Power BI to create this report?  Power BI reports are both quick to manipulate and page formatted.  The combination of Power Query M Scripts and DAX measure calculations makes Power BI extremely nimble, as does the visual design interface for building reports.  There is a plethora of community support and freely accessible training for those who are new to Power BI.  A dashboard created in Power BI can also function as a page formatted report.  If you are faced with a typical business intelligence, rapid and iterative prototyping scenario where exploratory analysis is refined into repeatable process measurement then Power BI is a good choice.    
 
 ### Overview
 Click [here](https://907sjl.github.io/referrals_powerbi/referrals_report) for an overview of the report.  The numerical values in these reports are fabricated and do not represent any real healthcare organization. 
@@ -68,7 +68,7 @@ The Data Loads group contains the extracts and loads from the source data files.
 
 Transforming a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that there are fewer dimensions playing a single role.  There is a single relationship between the dimension table and the fact table.    
 
-This data structure also allows dimensions to be placed side by side in bar chart visualizations for comparison.     
+This data structure also allows different dimension values to be placed side by side with measurements in bar chart visualizations for comparison.     
 
 The transforms:
 1. Reference the source **Referrals** table
