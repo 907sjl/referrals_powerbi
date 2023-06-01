@@ -63,7 +63,7 @@ The Data Loads group contains the extracts and loads from the source data files.
 ![Referral Milestone query steps](images/referral_milestone_steps.jpg)    
 **Referral Milestone** is a pivoted transformation of the referral process milestones into a vertical fact table rather than a horizontal list of milestone based attributes.  Doing so grants the ability to filter visuals on specific milestones and apply the same measure across one or more selected milestones.    
 
-Transforming a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that each of the related dimensions plays a single role.  There is a single relationship between the dimension table and the fact table.    
+Transforming a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that there are fewer dimensions playing a single role.  There is a single relationship between the dimension table and the fact table.    
 
 This data structure also allows dimensions to be placed side by side in bar chart visualizations for comparison.     
 
