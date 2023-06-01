@@ -62,17 +62,20 @@ The Data Loads group contains the extracts and loads from the source data files.
  
 ![Referral Milestone query steps](images/referral_milestone_steps.jpg)    
 **Referral Milestone** is a pivoted transformation of the referral process milestones into a vertical fact table rather than a horizontal list of milestone based attributes.  Doing so grants the ability to filter visuals on specific milestones and apply the same measure across one or more selected milestones.    
+
 Transforming a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that each of the related dimensions plays a single role.  There is a single relationship between the dimension table and the fact table.    
+
 This data structure also allows dimensions to be placed side by side in bar chart visualizations for comparison.     
 
 ![Days to milestones example](images/days_to_milestone_example.jpg)    
 Care has to be taken with this fact table because the days to each referral milestone are not additive.  In the example above the days until seen includes the days to accept and the days until scheduled.  The total days across all milestones is 13 days, and that is meaningless.  The median days to any one milestone across all referrals is meaningful, however.    
+
 The transforms:
 1. Reference the source **Referrals** table
-2. Select the columns that are relevant for this table
-3. Unpivot from a horizontal list of milestone dates and times to a vertical list
-4. Tag each milestone wait time with an age category (using the **GetAgeCategory** function)
-5. Clean up the source file naming and data types
+1. Select the columns that are relevant for this table
+1. Unpivot from a horizontal list of milestone dates and times to a vertical list
+1. Tag each milestone wait time with an age category (using the **GetAgeCategory** function)
+1. Clean up the source file naming and data types
 
 ### Power BI Data Model 
 
