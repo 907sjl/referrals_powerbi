@@ -61,13 +61,26 @@ The number of days is the parameter and the return value is the grouping categor
 The Data Loads group contains the extracts and loads from the source data files.  **Referral**, **Direct Secure Message**, and **Standard Calendar** each refer to the similarly named CSV file data source.  
 
 ### Referral Table 
+The query for the referral table loads records of referrals and processing dates from referrals.csv.   
+![Referral source file columns](images/referrals_source_columns.jpg)    
+This source file contains a horizontal list of columns representing the dates that each referral first reached processing milestones such as the date written, date sent, accepted, scheduled, and seen.
+
+![Referral table transforms #1](images/referral_steps_1.jpg)    
+Table transforms add columns that indicate whether or not the referral has reached each process milestone.  These are used by DAX measures in the report.  The indicators are either 1 or 0.  
+
+![Referral table transforms #2](images/referral_steps_2.jpg)    
+The number of days between milestones are also added to the table as calculated columns.  These are the used to age referrals from when they are sent and to calculate median process timings. 
+
+![Referral table transforms #3](images/referral_steps_3.jpg)    
+Finally the query uses the **GetAgeCategory** function to assign a category to the number of days a referral has been on hold or pending reschedule. 
+
 ### Referral Milestone Table  
 ![Referral Milestone query steps](images/referral_milestone_steps.jpg)    
 **Referral Milestone** is a pivoted transformation of the referral process milestones into a vertical fact table rather than a horizontal list of milestone based attributes.  Doing so grants the ability to filter visuals on specific milestones and apply the same measure across one or more selected milestones.    
 
-Transforming a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that there are fewer dimensions playing a single role.  There is a single relationship between the dimension table and the fact table.    
+Pivoting a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that there are fewer dimensions playing a single role.  There is a single relationship between the dimension table and the fact table.    
 
-This data structure also allows different dimension values to be placed side by side with measurements in bar chart visualizations for comparison.     
+This data structure also allows different dimension values to be placed side by side in bar chart visualizations for comparison.     
 
 The transforms:
 1. Reference the source **Referrals** table
