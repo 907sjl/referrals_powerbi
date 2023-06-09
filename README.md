@@ -56,9 +56,12 @@ in
 ```    
 The number of days is the parameter and the return value is the grouping category.      
 
+### Data Loads
 ![Contents of the data loads group](images/data_loads_group.jpg)    
 The Data Loads group contains the extracts and loads from the source data files.  **Referral**, **Direct Secure Message**, and **Standard Calendar** each refer to the similarly named CSV file data source.  
- 
+
+### Referral Table 
+### Referral Milestone Table  
 ![Referral Milestone query steps](images/referral_milestone_steps.jpg)    
 **Referral Milestone** is a pivoted transformation of the referral process milestones into a vertical fact table rather than a horizontal list of milestone based attributes.  Doing so grants the ability to filter visuals on specific milestones and apply the same measure across one or more selected milestones.    
 
