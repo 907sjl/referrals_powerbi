@@ -1,0 +1,19 @@
+---
+---
+
+@import "{{ site.theme }}";
+img.circleme { 
+  display: block; 
+  width: 65%; 
+  margin-left: auto;
+  margin-right: auto; 
+  margin-bottom: 16px; 
+}
+
+header.moreheader { 
+  width: 300px; 
+}
+
+header.lessheader { 
+  width: 150px; 
+}

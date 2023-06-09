@@ -9,11 +9,6 @@ Why would I choose Power BI to create this report?  Power BI reports are both qu
 ### Overview
 Click [here](https://907sjl.github.io/referrals_powerbi/referrals_report) for an overview of the report.  The numerical values in these reports are fabricated and do not represent any real healthcare organization. 
 
-### Contents
-- [Data sources](#data-sources)
-- [Power Query ELT](#power-query-elt)
-- [Power BI data model](#power-bi-data-model)
-
 ### Data sources 
 For the purposes of demonstration this example report loads data from three Comma Separated Values files.  The data in these files has been fabricated as an example.  It does not represent any real healthcare organization.   
 
