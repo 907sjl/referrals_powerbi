@@ -13,7 +13,17 @@
   </head>
   <body>
     <div class="wrapper">
-      {{ content }}
+      <header class="header">
+        <h3 id="contents">Contents</h3>
+          <ul>
+            <li><a href="#data-sources">Data sources</a></li>
+            <li><a href="#power-query-elt">Power Query ELT</a></li>
+            <li><a href="#power-bi-data-model">Power BI data model</a></li>
+         </ul>
+      </header>
+      <section> 
+        {{ content }} 
+      </section> 
     </div>
     <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
   </body>
