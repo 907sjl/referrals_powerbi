@@ -21,10 +21,11 @@ For the purposes of demonstration this example report loads data from three Comm
 - StandardCalendar.csv
 : Contains the data for the standard date dimension table used across reports.     
 
-### Power Query ELT
+## Power Query ELT
 ![A list of Power Query groups](images/query_groups.jpg)    
 Four custom groups and the one default group organize the Power Query loads, transforms, and ancillary constructs. 
 
+### Parameters and Functions
 ![Contents of the parameters group](images/parameters_group.jpg)    
 Parameters are used here for two purposes.  The **data_date** parameter is used to fix the effective date of this report to a specific date.  Many of the measures in this report are based on the age of a referral.  Since this example is loaded from static files the effective date must be fixed in time in order to avoid every referral aging out of range.
 
