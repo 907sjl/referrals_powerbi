@@ -61,7 +61,7 @@ The number of days is the parameter and the return value is the grouping categor
 The Data Loads group contains the extracts and loads from the source data files.  **Referral**, **Direct Secure Message**, and **Standard Calendar** each refer to the similarly named CSV file data source.  
 
 ### Referral Table 
-The query for the referral table loads records of referrals and processing dates from referrals.csv.   
+The query for the **Referral** table loads records of referrals and processing dates from referrals.csv.   
 ![Referral source file columns](images/referrals_source_columns.jpg)    
 This source file contains a horizontal list of columns representing the dates that each referral first reached processing milestones such as the date written, date sent, accepted, scheduled, and seen.
 
@@ -82,7 +82,7 @@ The measures and visualizations for days on hold and days pending reschedule are
 
 ### Referral Milestone Table  
 ![Referral Milestone query steps](images/referral_milestone_steps.jpg)    
-**Referral Milestone** is a pivoted transformation of the referral process milestones into a vertical fact table rather than a horizontal list of milestone based attributes.  Doing so grants the ability to filter visuals on specific milestones and apply the same measure across one or more selected milestones.    
+**Referral Milestone** is a pivoted transformation of the referral process milestones into a vertical fact table rather than a horizontal list of milestone attributes.  Doing so grants the ability to filter visuals on specific milestones and apply the same measure across one or more selected milestones.    
 
 Pivoting a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that there are fewer dimensions playing a single role.  There is a single relationship between the dimension table and the fact table.    
 
