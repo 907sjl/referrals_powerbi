@@ -66,7 +66,7 @@ The query for the referral table loads records of referrals and processing dates
 This source file contains a horizontal list of columns representing the dates that each referral first reached processing milestones such as the date written, date sent, accepted, scheduled, and seen.
 
 ![Referral table transforms #1](images/referral_steps_1.jpg)    
-Table transforms add columns that indicate whether or not the referral has reached each process milestone.  These are used by DAX measures in the report.  The indicators are either 1 or 0.  
+Table transforms add columns that indicate whether or not the referral has reached each process milestone.  These are used by DAX measures in the report.  Adding calculated columns in the Power Query load balances out the overall time spent waiting for calculations while working with Power BI reports.  Calculations and filters written into DAX measures are processed when the filters change, the view page is changed, or the visualization properties are changed.  In my time working with Power BI I have spent more time waiting for spinning wheel icons than actually working.  Loading a calculated column in the Power Query shifts some processing to the data refresh.  
 
 ![Referral table transforms #2](images/referral_steps_2.jpg)    
 The number of days between milestones are also added to the table as calculated columns.  These are the used to age referrals from when they are sent and to calculate median process timings. 
