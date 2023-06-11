@@ -82,7 +82,7 @@ However, the measures and visualizations for days on hold and days pending resch
 
 ### Referral Milestone Table  
 ![Referral Milestone query steps](images/referral_milestone_steps.jpg)    
-**Referral Milestone** is a pivoted transformation of the referral process milestones into a vertical fact table rather than a horizontal list of milestone attributes.  Doing so grants the ability to filter visuals on specific milestones and apply the same measure across one or more selected milestones.  This data structure also allows different dimension values to be placed side by side in bar chart visualizations for comparison.    
+**Referral Milestone** is a pivoted transformation of the referral process milestones into a vertical fact table rather than a horizontal list of milestone attributes.  Doing so grants the ability to filter visuals on specific milestones and apply the same measure across one or more selected milestones.  Using this data structure also simplifies the use of bar charts to place different milestones side by side for comparison.    
 
 Pivoting a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that there are fewer dimensions playing a single role.  There is a single relationship between the dimension table and the fact table instead of multiple sub-class dimensions of age category.    
 
