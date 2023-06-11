@@ -78,13 +78,13 @@ Finally the query uses the **GetAgeCategory** function to assign a category to t
 
 These two dimension columns are related in that they are a sub-class of age categories.  The **Referral Milestone** table that follows is an example where a pivoted transform can model these two, separate sub-classes of age category as the more general class of **Age Category** in a single dimension table and a single fact.   
 
-However, the measures and visualizations for days on hold and days pending reschedule are never in the same chart.  Treating these age categories as columns of a referral is convenient and also intuitive for consumers of the data model.  This ELT creates both a wide, denormalized reporting table in **Referral** and a normalized star schema in **Referral Milestone**.    
+However, the measures and visualizations for days on hold and days pending reschedule are never in the same chart.  Treating these age categories as columns of a referral is convenient and also intuitive for consumers of the data model.  This ELT creates both a wide, less normalized reporting table in **Referral** and a step towards a proper star schema with the milestone as a dimension in **Referral Milestone**.    
 
 ### Referral Milestone Table  
 ![Referral Milestone query steps](images/referral_milestone_steps.jpg)    
 **Referral Milestone** is a pivoted transformation of the referral process milestones into a vertical fact table rather than a horizontal list of milestone attributes.  Doing so grants the ability to filter visuals on specific milestones and apply the same measure across one or more selected milestones.    
 
-Pivoting a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that there are fewer dimensions playing a single role.  There is a single relationship between the dimension table and the fact table.    
+Pivoting a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that there are fewer dimensions playing a single role.  There is a single relationship between the dimension table and the fact table instead of multiple sub-class dimensions of age category.    
 
 This data structure also allows different dimension values to be placed side by side in bar chart visualizations for comparison.     
 
