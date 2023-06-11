@@ -96,7 +96,15 @@ The transforms:
 ![Days to milestones example](images/days_to_milestone_example.jpg)    
 Care has to be taken with this fact table because the days to each referral milestone are not additive.  In the example above the days until seen includes the days to accept and the days until scheduled.  The total days across all milestones is 13 days, and that is meaningless.  The median days to any one milestone across all referrals is meaningful, however.    
 
-### Power BI Data Model 
+### Direct Secure Message Table 
+The query for the **Direct Secure Message** table loads records of messages to referral inboxes about referred patients from DirectSecureMessages.csv.  The query simply loads the file, typecasts, and renames columns.  These records are used to evaluate the use of referrals to acquire new patients versus direct messaging.   
+
+### Standard Calendar Table 
+The query for the **Standard Calendar** table loads records of calendar dates and their pivotal attributes from StandardCalendar.csv.  This query also simply loads the file and typecasts columns.  These records are used to create the date dimension for the report.  This dimension will play many roles in the data model.   
+
+### Dimension Tables 
+
+## Power BI Data Model 
 
 h
 
