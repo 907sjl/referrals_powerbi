@@ -78,7 +78,7 @@ Finally the query uses the **GetAgeCategory** function to assign a category to t
 
 These two dimension columns are related in that they are a sub-class of age categories.  The **Referral Milestone** table that follows is an example where a pivoted transform can model these two, separate sub-classes of age category as the more general class of **Age Category** in a single dimension table and a single fact.   
 
-The measures and visualizations for days on hold and days pending reschedule are never in the same chart.  Treating these age categories as columns of a referral is convenient and also intuitive for consumers of the data model.    
+However, the measures and visualizations for days on hold and days pending reschedule are never in the same chart.  Treating these age categories as columns of a referral is convenient and also intuitive for consumers of the data model.  This ELT creates both a wide, denormalized reporting table in **Referral** and a normalized star schema in **Referral Milestone**.    
 
 ### Referral Milestone Table  
 ![Referral Milestone query steps](images/referral_milestone_steps.jpg)    
