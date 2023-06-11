@@ -71,12 +71,12 @@ Table transforms add columns that indicate whether or not the referral has reach
 Adding calculated columns in Power Query balances out the overall time spent waiting for calculations while working with Power BI reports.  Calculations and filters written into DAX measures are processed when the filters change, the view page is changed, or visualization properties are changed.  In my time working with Power BI I have spent more time waiting for spinning wheel icons than actually working.  Loading a calculated column in Power Query shifts some processing to the data refresh.  
 
 ![Referral table transforms #2](images/referral_steps_2.jpg)    
-The number of days between milestones are also added to the table as calculated columns.  These columns are used to age referrals from the date when they are sent and to calculate median process timings. 
+The number of days between milestones are also added to the table as calculated columns.  These columns are used to age referrals from the date when they are sent.  These ages are used to calculate median process timings. 
 
 ![Referral table transforms #3](images/referral_steps_3.jpg)    
 Finally the query uses the **GetAgeCategory** function to assign a category to the number of days a referral has been on hold or pending reschedule.  This creates two, separate dimension columns for each type of age category, on hold or pending reschedule.    
 
-These two dimension columns are related in that they are a sub-class of age categories.  The Referral Milestone table that follows is an example where a pivoted transform can treat these two, separate sub-classes of age category as the more general class of "Age Category" with a single dimension table.   
+These two dimension columns are related in that they are a sub-class of age categories.  The **Referral Milestone** table that follows is an example where a pivoted transform can model these two, separate sub-classes of age category as the more general class of **Age Category** in a single dimension table and a single fact.   
 
 The measures and visualizations for days on hold and days pending reschedule are never in the same chart.  Treating these age categories as columns of a referral is convenient and also intuitive for consumers of the data model.    
 
