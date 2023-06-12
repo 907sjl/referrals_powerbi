@@ -106,12 +106,21 @@ The query for the **Standard Calendar** table loads records of calendar dates an
 ![Contents of the dimensions group](images/dimensions_group.jpg)    
 The queries in the Dimensions group fill tables representing the pivotal dimensions for reporting.  These tables can be related to multiple other tables that contain facts used in measures.  They can also contain attributes used to sort or filter dimension values in visualizations by something other than the dimension name.    
 
-Three dimensions are sourced directly from the report definition.  They are entered into the Power Query and stored JSON: 
+Three dimensions are sourced directly from the report definition.  They are entered into the Power Query and stored as JSON: 
 - **Age Category** is a table of bin names used to group referrals together in visualizations by their age to reach a certain milestone.  
 - **Milestone** is a table of referral processing milestones used in process measurements.  
 - **Test of CRM Use** is a table of measure names used to test how often a clinic uses their Clinic Referral Management system versus only using the clinic schedule book for new patients.    
 
 The **Clinic** dimension is sourced from the **Referral** table and represents the list of unique clinic names where referrals are sent.    
+
+### Other Tables 
+![Contents of the Other Queries group](images/other_group.jpg)    
+The default Other Queries group has one remaining table that doesn't fit into other categories.  The **Measure** table is used to place separate measures side-by-side in bar charts with axis labels.  Measures are added to a visualization by filtering on them instead of adding them to the visualization design.    
+
+![Measure table sample data](images/measure_table.jpg)    
+The records of the Measure table are entered into the Power Query and stored as JSON.  The name of each measure is stored along with columns that can be used to group measures together.  Bundles of related measures can be selected for a visualization by filtering on these columns.    
+
+A DAX measure surfaces the data for the selected measures using a SWITCH statement on the measure name to pair it with the corresponding formula in DAX.  
 
 ## Power BI Data Model 
 
