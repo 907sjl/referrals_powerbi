@@ -115,12 +115,12 @@ The **Clinic** dimension is sourced from the **Referral** table and represents t
 
 ### Other Tables 
 ![Contents of the Other Queries group](images/other_group.jpg)    
-The default Other Queries group has one remaining table that doesn't fit into other categories.  The **Measure** table is used to place separate measures side-by-side in bar charts with axis labels.  Measures are added to a visualization by filtering on them instead of adding them to the visualization design.    
+The default Other Queries group has one remaining table that doesn't fit with the other groups.  The **Measure** table is used to place separate measures side-by-side in bar charts with axis labels.  Measures are added to a visualization by filtering on them instead of adding them to the visualization design.    
 
 ![Measure table sample data](images/measure_table.jpg)    
-The records of the Measure table are entered into the Power Query and stored as JSON.  The name of each measure is stored along with columns that can be used to group measures together.  Bundles of related measures can be selected for a visualization by filtering on these columns.    
+The records of the **Measure** table are entered into the Power Query and stored as JSON.  The name of each measure is stored along with columns that can be used to group measures together.  Bundles of related measures can be selected for a visualization by filtering on these columns.    
 
-A DAX measure surfaces the data for the selected measures using a SWITCH statement on the measure name to pair it with the corresponding formula in DAX.  
+A DAX measure surfaces data for selected measures using a SWITCH statement on the measure name to pair it with the corresponding formula in DAX.  
 
 ## Power BI Data Model 
 
