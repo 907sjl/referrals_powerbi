@@ -103,6 +103,15 @@ The query for the **Direct Secure Message** table loads records of messages to r
 The query for the **Standard Calendar** table loads records of calendar dates and their pivotal attributes from StandardCalendar.csv.  This query simply loads the file and typecasts columns.  These records are used to create the date dimension for the report.  This dimension will play many roles in the data model.   
 
 ### Dimension Tables 
+![Contents of the dimensions group](images/dimensions_group.jpg)    
+The queries in the Dimensions group fill tables representing the pivotal dimensions for reporting.  These tables can be related to multiple other tables that contain facts used in measures.  They can also contain attributes used to sort or filter dimension values in visualizations by something other than the dimension name.    
+
+Three dimensions are sourced directly from the report definition.  They are entered into the Power Query and stored JSON: 
+- **Age Category** is a table of bin names used to group referrals together in visualizations by their age to reach a certain milestone.  
+- **Milestone** is a table of referral processing milestones used in process measurements.  
+- **Test of CRM Use** is a table of measure names used to test how often a clinic uses their Clinic Referral Management system versus only using the clinic schedule book for new patients.    
+
+The **Clinic** dimension is sourced from the **Referral** table and represents the list of unique clinic names where referrals are sent.    
 
 ## Power BI Data Model 
 
