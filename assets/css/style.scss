@@ -14,10 +14,6 @@ header.moreheader {
   width: 300px; 
 }
 
-header.lessheader { 
-  width: 200px; 
-}
-
 section.morecontent {
   width: 600px; 
 } 
@@ -25,4 +21,17 @@ section.morecontent {
 div.tocitem { 
   margin-bottom: 5px; 
   margin-left: 10px;
+}
+
+div.tocitemlast { 
+  margin-bottom: 20px; 
+  margin-left: 10px;
+}
+
+div.tocgroup { 
+  margin-bottom: 5px; 
+}
+
+div.tocsingleton { 
+  margin-bottom: 20px; 
 }
