@@ -107,8 +107,8 @@ The query for the **Standard Calendar** table loads records of calendar dates an
 The queries in the Dimensions group fill tables representing the pivotal dimensions for reporting.  These tables can be related to multiple other tables that contain facts used in measures.  They can also contain attributes used to sort or filter dimension values in visualizations by something other than the dimension name.    
 
 Three dimensions are sourced directly from the report definition.  They are entered into the Power Query and stored as JSON: 
-- **Age Category** is a table of bin names used to group referrals together in visualizations by their age to reach a certain milestone.  
-- **Milestone** is a table of referral processing milestones used in process measurements.  
+- **Age Category** is a table of bins used to group referrals in timing distributions.  
+- **Milestone** is a table of referral process milestones used in process measurements.  
 - **Test of CRM Use** is a table of measure names used to test how often a clinic uses their Clinic Referral Management system versus only using the clinic schedule book for new patients.    
 
 The **Clinic** dimension is sourced from the **Referral** table and represents the list of unique clinic names where referrals are sent.    
@@ -127,9 +127,6 @@ A DAX measure surfaces data for selected measures using a SWITCH statement on th
 Three tables host measures that are surfaced in report visualizations.  The **Referral**, **Referral Milestone**, and **Direct Secure Message** tables contain fact values.    
 
 Specific data dimensions are persisted into tables due to their values existing in multiple fact tables, or their values are sorted by a column other than their description.  
-- **Age Category** lists descriptions of bins used to group and visualize distributions.  
-- **Clinic** lists the names of clinics where referrals are sent.  
-- **Milestone** lists referral processing milestones used in median timing calculations.  
 
 The **Standard Calendar** table is the time dimension.  It is a table of calendar dates and attributes such as year and month that are used to filter and sort visualizations by date.    
 
