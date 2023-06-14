@@ -108,7 +108,7 @@ The queries in the Dimensions group fill tables representing the pivotal dimensi
 
 Three dimensions are sourced directly from the report definition.  They are entered into the Power Query and stored as JSON: 
 - **Age Category** is a table of bins used to group referrals in timing distributions.  
-- **Milestone** is a table of referral process milestones used in process measurements.  
+- **Milestone** is a table of referral process milestones.  
 - **Test of CRM Use** is a table of measure names used to test how often a clinic uses their Clinic Referral Management system versus only using the clinic schedule book for new patients.    
 
 The **Clinic** dimension is sourced from the **Referral** table and represents the list of unique clinic names where referrals are sent.    
