@@ -124,11 +124,11 @@ A DAX measure surfaces data for selected measures using a SWITCH statement on th
 
 ## Power BI Data Model 
 <a href="images/data_model.jpg"><img alt="Data model ERD" src="images/data_model.jpg?raw=true"/></a> 
-Three tables host measures that are surfaced in visualizations in the report.  The **Referral**, **Referral Milestone**, and **Direct Secure Message** tables contain fact values.    
+Three tables host measures that are surfaced in report visualizations.  The **Referral**, **Referral Milestone**, and **Direct Secure Message** tables contain fact values.    
 
 Specific data dimensions are persisted into tables due to their values existing in multiple fact tables, or their values are sorted by a column other than their description.  
 - **Age Category** lists descriptions of bins used to group and visualize distributions.  
 - **Clinic** lists the names of clinics where referrals are sent.  
-- **Milestone** lists referral processing milestones.  
+- **Milestone** lists referral processing milestones used in median timing calculations.  
 
-The **Standard Calendar** is the time dimension.  It is a table of calendar dates and attributes such as year and month that are used to filter and sort visualizations by date.  This table participates in multiple relationships to both the **Referral** and **Direct Secure Message** tables.  Each of these relationships represents a role that dates play in measures.  The date when a referral is sent or the date when a referral is placed on hold, for example.  A single, more generalized date dimension allows for a simpler data model compared to persisting a sub-class of date dimensions for each role.  A single date slicer in a report can be used to filter measures that each reference a different date by way of the USERELATIONSHIP function in DAX.    
+The **Standard Calendar** table is the time dimension.  It is a table of calendar dates and attributes such as year and month that are used to filter and sort visualizations by date.  This table participates in multiple relationships to both the **Referral** and **Direct Secure Message** tables.  Each of these relationships represents a role that dates play in measures.  The date when a referral is sent or the date when a referral is placed on hold, for example.  A single, more generalized date dimension allows for a simpler data model compared to persisting a sub-class of date dimensions for each role.  A single date slicer in a report can be used to filter measures that each reference a different date by way of the USERELATIONSHIP function in DAX.    
