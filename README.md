@@ -123,46 +123,4 @@ The records of the **Measure** table are entered into the Power Query and stored
 A DAX measure surfaces data for selected measures using a SWITCH statement on the measure name to pair it with the corresponding formula in DAX.  
 
 ## Power BI Data Model 
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
-h
-
+![Data model ERD](images/data_model.jpg)    
