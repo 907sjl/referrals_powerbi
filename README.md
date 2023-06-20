@@ -40,7 +40,7 @@ The **data_date** parameter is used to calculate the number of days that a refer
 The **data_path** parameter provides a single, convenient location to set the directory where the report can find the data files to load.  The *Source* step of each source table references this parameter along with one of the other parameters containing the name of the file to load.    
 
 ![Contents of the functions group](images/functions_group.jpg)    
-This Power Query ELT makes use of the **GetAgeCategory** function to template a column transform.  The function assigns a distribution grouping bin to the number of days leading up to a process milestone.  The function places transformation logic in an easy to find location.  It also templates a transformation that may potentially be used more than once.  Changes can be made in a single place.    
+This Power Query ELT makes use of the **GetAgeCategory** function to template a column transform.  The function assigns a distribution grouping bin to the number of days leading up to a process milestone.  Encapsulating business logic into functions places that logic in an easy to find location.  It also templates a transformation that may potentially be used more than once.  Changes can be made in a single place.    
 
 ```
 = (Days as any) as any => 
@@ -74,7 +74,7 @@ Adding calculated columns in Power Query balances out the overall time spent wai
 The number of days between milestones are also added to the table as calculated columns.  These columns are used to age referrals from the date when they are sent.  These ages are used to calculate median process timings. 
 
 ![Referral table transforms #3](images/referral_steps_3.jpg)    
-Along the lines of shifting some processing work to the data refresh, the query calculates a set of extended date columns used by DAX measures in the report.  These date manipulations are present in most of the measures that are visualized.  There are useful functions and techniques in DAX to calculate time phased measures without these calculated date columns, but this would come at the cost of more complicated DAX measures and more processing when slicer values change or a new page is selected.    
+Along the lines of shifting work to the data refresh, the query calculates a set of extended date columns used by DAX measures in the report.  These date manipulations are present in most of the measures that are visualized.  There are useful functions and techniques in DAX to calculate time phased measures without these calculated date columns, but this would come at the cost of more complicated DAX measures and more processing when slicer values change or a new page is selected.    
 
 ### Processing Time Table  
 ![Processing Time query steps](images/processing_time_steps.jpg)    
@@ -93,7 +93,7 @@ The transforms:
 Care has to be taken with this fact table because the days to each referral milestone are not additive.  In the example above the days until seen includes the days to accept and the days until scheduled.  The total days across all milestones is 13 days, and that is meaningless.  The median days to any one milestone across all referrals is meaningful, however.    
 
 ### Direct Secure Message Table 
-The query for the **Direct Secure Message** table loads records of messages to referral inboxes from DirectSecureMessages.csv.  The query simply loads the file, typecasts, and renames columns.  These records are used to evaluate the use of referrals to acquire new patients versus direct messaging.   
+The query for the **Direct Secure Message** table loads records of messages to referral inboxes from DirectSecureMessages.csv.  The query simply loads the file, typecasts, and renames columns.  These records are used to evaluate how often referrals are used to acquire new patients versus direct messaging.   
 
 ### Standard Calendar Table 
 The query for the **Standard Calendar** table loads records of calendar dates and their pivotal attributes from StandardCalendar.csv.  This query simply loads the file and typecasts columns.  These records are used to create the date dimension for the report.  This dimension will play many roles in the data model.   
@@ -111,10 +111,10 @@ The **Clinic** dimension is sourced from the **Referral** table and represents t
 
 ### Other Tables 
 ![Contents of the Other Queries group](images/other_group.jpg)    
-The default Other Queries group has one remaining table that doesn't fit with the other groups.  The **Measure** table is used to place separate measures side-by-side in bar charts with axis labels.  Measures are added to a visualization by filtering on them instead of adding them to the visualization design.    
+The default Other Queries group has one remaining table that doesn't fit with the other groups.  The **Report Measure** table is used to place separate metrics side-by-side in bar charts with axis labels.  Measures are added to a visualization by filtering on them instead of adding them to the visualization design.    
 
-![Measure table sample data](images/measure_table.jpg)    
-The records of the **Measure** table are entered into the Power Query and stored as JSON.  The name of each measure is stored along with columns that can be used to group measures together.  Bundles of related measures can be selected for a visualization by filtering on these columns.    
+![Report Measure table sample data](images/measure_table.jpg)    
+The records of the **Report Measure** table are entered into the Power Query and stored as JSON.  The name of each measure is stored along with columns that can be used to group measures together.  Bundles of related measures can be selected for a visualization by filtering on these columns.    
 
 A DAX measure surfaces data for selected measures using a SWITCH statement on the measure name to pair it with the corresponding formula in DAX.  
 
