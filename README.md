@@ -40,7 +40,7 @@ The **data_date** parameter is used to calculate the number of days that a refer
 The **data_path** parameter provides a single, convenient location to set the directory where the report can find the data files to load.  The *Source* step of each source table references this parameter along with one of the other parameters containing the name of the file to load.    
 
 ![Contents of the functions group](images/functions_group.jpg)    
-This report makes use of the **GetAgeCategory** function to template a column transform that is used multiple times.  It assigns a distribution grouping to the number of days leading up to a process milestone.    
+This Power Query ELT makes use of the **GetAgeCategory** function to template a column transform.  The function assigns a distribution grouping bin to the number of days leading up to a process milestone.  The function places transformation logic in an easy to find location.  It also templates a transformation that may potentially be used more than once.  Changes can be made in a single place.    
 
 ```
 = (Days as any) as any => 
@@ -54,7 +54,7 @@ let
 in
     Source
 ```    
-The number of days is the parameter and the return value is the grouping category.      
+The number of days is the parameter and the return value is the grouping bin name.    
 
 ### Data Loads
 ![Contents of the data loads group](images/data_loads_group.jpg)    
@@ -74,17 +74,13 @@ Adding calculated columns in Power Query balances out the overall time spent wai
 The number of days between milestones are also added to the table as calculated columns.  These columns are used to age referrals from the date when they are sent.  These ages are used to calculate median process timings. 
 
 ![Referral table transforms #3](images/referral_steps_3.jpg)    
-Finally the query uses the **GetAgeCategory** function to assign a category to the number of days a referral has been on hold or pending reschedule.  This creates two, separate dimension columns for each type of age category, on hold or pending reschedule.    
+Along the lines of shifting some processing work to the data refresh, the query calculates a set of extended date columns used by DAX measures in the report.  These date manipulations are present in most of the measures that are visualized.  There are useful functions and techniques in DAX to calculate time phased measures without these calculated date columns, but this would come at the cost of more complicated DAX measures and more processing when slicer values change or a new page is selected.    
 
-These two dimension columns are related in that they are a sub-class of age categories.  The **Referral Milestone** table that follows is an example where a pivoted transform can model these two, separate sub-classes of age category as the more general class of **Age Category** in a single dimension table and a single fact.   
+### Processing Time Table  
+![Processing Time query steps](images/processing_time_steps.jpg)    
+**Processing Time** is a pivoted transformation of the referral process metrics into a vertical fact table rather than a horizontal list of milestone attributes.  Doing so grants the ability to filter visuals on specific metrics and apply the same aggregation across one or more selected metrics.  Using this data structure also simplifies the use of bar charts to place different metrics side by side for comparison.    
 
-However, the measures and visualizations for days on hold and days pending reschedule are never in the same chart.  Treating these age categories as columns of a referral is convenient and also intuitive for consumers of the data model.  This ELT creates both a wide, less normalized reporting table in **Referral** and a step towards a proper star schema with milestone as a dimension in **Referral Milestone**.    
-
-### Referral Milestone Table  
-![Referral Milestone query steps](images/referral_milestone_steps.jpg)    
-**Referral Milestone** is a pivoted transformation of the referral process milestones into a vertical fact table rather than a horizontal list of milestone attributes.  Doing so grants the ability to filter visuals on specific milestones and apply the same measure across one or more selected milestones.  Using this data structure also simplifies the use of bar charts to place different milestones side by side for comparison.    
-
-Pivoting a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that there are fewer dimensions playing a single role.  There is a single relationship between the dimension table and the fact table instead of multiple sub-class dimensions of age category.    
+Pivoting a horizontal list of milestone columns into a vertical fact table results in a simplified data model in that there are fewer dimensions playing a single role.  There is a single relationship between the dimension table and the fact table instead of multiple sub-classes of age category for each process metric.    
 
 The transforms:
 1. Reference the source **Referrals** table
@@ -108,7 +104,7 @@ The queries in the Dimensions group fill tables representing the pivotal dimensi
 
 Three dimensions are sourced directly from the report definition.  They are entered into the Power Query and stored as JSON: 
 - **Age Category** is a table of bins used to group referrals in timing distributions.  
-- **Milestone** is a table of referral process milestones.  
+- **Process Metric** is a table of referral process milestones and other time calculations used to monitor performance.  
 - **Test of CRM Use** is a table of measure names used to test how often a clinic uses their Clinic Referral Management system versus only using the clinic schedule book for new patients.    
 
 The **Clinic** dimension is sourced from the **Referral** table and represents the list of unique clinic names where referrals are sent.    
@@ -124,7 +120,7 @@ A DAX measure surfaces data for selected measures using a SWITCH statement on th
 
 ## Power BI Data Model 
 <a href="images/data_model.jpg"><img alt="Data model ERD" src="images/data_model.jpg?raw=true"/></a> 
-Three tables host measures that are surfaced in report visualizations.  The **Referral**, **Referral Milestone**, and **Direct Secure Message** tables contain fact values.    
+Three tables host measures that are surfaced in report visualizations.  The **Referral**, **Processing Time**, and **Direct Secure Message** tables contain fact values.    
 
 Specific data dimensions are persisted into tables due to their values existing in multiple fact tables, or their values are sorted by a column other than their description.  
 
@@ -132,11 +128,8 @@ Specific data dimensions are persisted into tables due to their values existing 
 The **Age Category** dimension table has an added column with a pre-defined sort order.  The sequence of the sort order reinforces the contextual meaning of the dimension name.  This sorting is neither based on alphabetical order nor volume of data.  This dimension's name column has its sort order overriden by the SortOrder column.     
 
 ![Clinic name slicer on report page](images/clinic_slicer.jpg)    
-This slicer is an example of filtering a dimension table versus an attribute of a table.  The **Clinic** dimension table has one-to-many relationships to both the **Referral** and **Direct Secure Message** tables.  If this slicer were connected to the Clinic column in either of those two tables it would only filter the records in the table that the slicer was connected to.  Connecting the slicer, or any filter, to the **Clinic** table filters both of the tables that it is related to.  Filtering the **Referral** table will also filter the **Referral Milestone** table by transition since **Referral** acts as a dimension in that relationship.    
+This slicer is an example of filtering a dimension table versus an attribute of a table.  The **Clinic** dimension table has one-to-many relationships to both the **Referral** and **Direct Secure Message** tables.  If this slicer were connected to the Clinic column in either of those two tables it would only filter the records in the table that the slicer was connected to.  Connecting the slicer, or any filter, to the **Clinic** table filters both of the tables that it is related to.  Filtering the **Referral** table will also filter the **Processing Time** table by transition since **Referral** acts as a dimension in that relationship.    
 
 The **Standard Calendar** table is the time dimension.  It is a table of calendar dates and attributes such as year and month that are used to filter and sort visualizations by date.    
 
 **Standard Calendar** participates in multiple relationships to both the **Referral** and **Direct Secure Message** tables.  Each of these relationships represents a role that dates play in measures.  The date when a referral is sent or the date when a referral is placed on hold, for example.  A single, more generalized date dimension creates a simpler data model compared to sub-classes of date dimensions for every role.  A single date slicer in a report filters measures by different dates using the USERELATIONSHIP function in DAX.    
-
-![Age Category relationships to Referral](images/age_category_to_referral.jpg)    
-Another dual role exists between **Age Category** and **Referral**.  This represents the days a referral is either on hold or pending reschedule.  A referral can only be in one of these two states.  The **Referral** table has both sub-classes of age category but the relationship to the **Age Category** dimension from both provides the custom sort order in visualizations.  Neither relationship can be active because it creates multiple search paths for filtering data.  Any measure used to visualize days on hold or days pending reschedule must include the USERELATIONSHIP function.    
