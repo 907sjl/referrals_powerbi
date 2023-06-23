@@ -133,3 +133,75 @@ This slicer is an example of filtering a dimension table versus an attribute of 
 The **Standard Calendar** table is the time dimension.  It is a table of calendar dates and attributes such as year and month that are used to filter and sort visualizations by date.    
 
 **Standard Calendar** participates in multiple relationships to both the **Referral** and **Direct Secure Message** tables.  Each of these relationships represents a role that dates play in measures.  The date when a referral is sent or the date when a referral is placed on hold, for example.  A single, more generalized date dimension creates a simpler data model compared to sub-classes of date dimensions for every role.  A single date slicer in a report filters measures by different dates using the USERELATIONSHIP function in DAX.    
+
+## Power BI Report
+
+Click [here](https://907sjl.github.io/referrals_powerbi/referrals_report) for an overview of the report.  The following sections describe the DAX measures behind some of the visualizations.    
+
+### Volume of Referrals After 90 Days 
+![Bar chart of referral volume after 90 days](images/volume_sent_90d.jpg)    
+
+This horizontal bar chart represents the volume of referrals sent to a clinic alongside the number of those referrals that were canceled, rejected, or closed without being seen.  The referrals included in this visualization are all aged 90 days from when they were sent to the clinic.  The time for a referral to be scheduled, seen, and completed is calculated after 90 days.  The volumes in this bar chart explain the population size for the median timing metrics.    
+
+This visualization is built upon a few layers of DAX measures.  
+```
+Count Sent after 90d = 
+  MAX(
+    CALCULATE(DISTINCTCOUNTNOBLANK(Referral[Referral ID])
+      , KEEPFILTERS(Referral[# Sent] > 0)
+      , USERELATIONSHIP('Standard Calendar'[Date], Referral[Date Reported after 90d]))
+    , 0)
+```    
+The core layer calculates the number of referrals sent to the clinic that aged 90 days.  Two calculated columns from the Power Query assist with this measure.  The sent indicator, **# Sent**, is either 1 or 0.  The **Date Reported after 90d** column adds 90 days to the date the referral was sent.  The DAX function DATEADD could also be used but at the expense of more frequent processing when each visualization is rendered.  The 90 day age is a static concept that is built into the report.    
+
+```
+Count Canceled after 90d = 
+MAX(
+  CALCULATE([Count Sent after 90d] 
+    , KEEPFILTERS(Referral[Referral Status] IN {"Cancelled"})
+  ) 
+  , 0) 
+
+Count Rejected after 90d = 
+MAX(
+  CALCULATE([Count Sent after 90d] 
+    , KEEPFILTERS(Referral[Referral Status] IN {"Rejected"})
+  ) 
+  , 0) 
+```    
+The counts of canceled and rejected referrals build on to the **Count Sent after 90d** measure by adding filters to focus on those specific subsets of referrals that were sent.  The canceled and rejected referrals are highlighted here because they are not considered in the percentage of referrals scheduled or seen after 90 days.  It is possible to reach 100% for both metrics.    
+
+```
+Count Referrals Closed WBS after 90d = 
+MAX(
+  CALCULATE([Count Sent after 90d] 
+    , KEEPFILTERS( Referral[Referral Status] IN {"Completed", "Closed"} 
+                   && ISBLANK(Referral[Date Referral Seen]) 
+                   && ISBLANK(Referral[Date Patient Checked In]))
+  ) 
+  , 0) 
+```    
+Referrals are counted as closed without being seen if they are sent but then completed or closed without any data to indicate that the patient was seen.  These referrals are also removed from the percentages of referrals that are scheduled or seen.    
+
+An additional layer of DAX overlays these measures and surfaces them to the bar chart visual.  This is the **Report Measure** table described in the Power Query ELT.  The Report Measure table holds a measure that acts as a switchboard of measures.  
+
+```
+Measured Whole Number Value = 
+  SWITCH(MIN('Report Measure'[Measure Name]), 
+    "Count Linked after 90d", [Count Linked after 90d], 
+    "Count Scheduled after 90d", [Count Scheduled after 90d],
+    "Count Tagged as Seen after 90d", [Count Tagged as Seen after 90d],
+    "Count Seen or Checked In after 90d", [Count Seen or Checked In after 90d],
+    "Count Rejected after 90d", [Count Rejected after 90d],
+    "Count Canceled after 90d", [Count Canceled after 90d],
+    "Count Referrals Closed WBS after 90d", [Count Referrals Closed WBS after 90d],
+    "Count Sent after 90d", [Count Sent after 90d],
+    ...
+```    
+This measure is assigned to the bar chart visual as the X-axis.  
+![X-axis of volume sent](images/volume_sent_x_axis.jpg)    
+This allows multiple, separate measures like the ones shown above to appear side-by-side as bars with labels in the Y-axis.  This also allows measures to be included using the filter on the visuals.    
+![Filters on volume sent](images/volume_sent_x_measure_filter.jpg)    
+This visual includes all measures with an attribute value of Sent in the Milestone column.  If this report were also published interactively in the cloud service this could also introduce interesting capabilities for the viewer to customize the page.    
+
+### Display Folders for Data Elements
