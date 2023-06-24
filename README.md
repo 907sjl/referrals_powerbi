@@ -138,6 +138,10 @@ The **Standard Calendar** table is the time dimension.  It is a table of calenda
 
 Click [here](https://907sjl.github.io/referrals_powerbi/referrals_report) for an overview of the report.  The following sections describe the DAX measures behind some of the visualizations.    
 
+### Referral Status 
+![State chart for a referral](images/referral_states.png)    
+A referral will be in one of eight states from a process perspective.  A referral is written in the Clinical Referral Management system then sent to the specialty clinic.  The referral is also considered pending acceptance when it is sent.  At that point the referral is either accepted, cancelled, rejected, or sometimes closed because the referral must be forwarded to another organization.  The clinic accepts and schedules a referred patient when the case has been reviewed, the patient is seen, and then the referral is completed with a visit summary.    
+
 ### Volume of Referrals After 90 Days 
 ![Bar chart of referral volume after 90 days](images/volume_sent_90d.jpg)    
 
