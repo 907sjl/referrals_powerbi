@@ -136,7 +136,7 @@ The **Standard Calendar** table is the time dimension.  It is a table of calenda
 
 ## Power BI Report
 
-In the scenario where this report is used we did not have access to the Power BI cloud service.  Customers receive PDF exports of report pages.  The free Desktop version of Power BI easily handled this and allowed for rapid and agile adjustments during the iterative investigation into valuable metrics using available data.  Without the cloud premise there is no option for automating the delivery.  So then the next step to operationalize this report would either be to move it to the cloud or redo portions of it using a Python stack.    
+In the scenario where this report is used we did not have access to the Power BI cloud service.  Customers receive PDF exports of report pages.  The free Desktop version of Power BI easily handled this and allowed for agile adjustments during the iterative investigation into valuable metrics.  Without the cloud premise there is no option for automating the delivery.  So then the next step to operationalize this report would be to either move it to the cloud or redo portions of it using a Python stack.    
 
 Click [here](https://907sjl.github.io/referrals_powerbi/referrals_report) for an overview of the report.  The following sections describe the DAX measures behind some of the visualizations.    
 
