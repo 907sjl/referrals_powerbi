@@ -212,4 +212,13 @@ This allows multiple, separate measures like the ones shown above to appear side
 ![Filters on volume sent](images/volume_sent_x_measure_filter.jpg)    
 This visual includes all measures with an attribute value of **Sent** in the **Milestone** column.  If this report is published interactively in the cloud service this also introduces interesting capabilities for the viewer to customize the page.    
 
+### Process Rates After 90 Days 
+![Bar chart and tables of process rates after 90 days](images/process_rates_90d.jpg)    
+
+The number of referrals that are sent to a clinic and kept are aged for process metrics.  This bar chart compares the number of referrals that have reached each of the process milestones 90 days after they are sent.    
+
+Rates matching the bar chart counts are listed to the right of the chart.  The number of aged referrals is the denominator for each of the process rates.  Aged referrals are those that are sent to a clinic and not rejected, canceled, or closed without being seen.    
+
+Median times to reach each milestone include all aged referrals.  Referrals that have not reached the milestone yet are aged to the report date.    
+
 ### Display Folders for Data Elements
