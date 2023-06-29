@@ -214,7 +214,7 @@ This visual includes all measures with an attribute value of **Sent** in the **M
 
 ### Process Rates After 90 Days 
 ![Bar chart and tables of process rates after 90 days](images/process_rates_90d.jpg)    
-The number of referrals that are sent to a clinic and kept are aged for process metrics.  This bar chart compares the number of referrals that have reached each of the process milestones 90 days after they are sent.    
+Referrals are aged if they are sent to a clinic and kept.  Aged referrals are included in process metrics.  This bar chart compares the number of referrals that have reached each of the process milestones 90 days after they are sent.    
 
 ```
 Count Referrals after 90d = 
@@ -223,7 +223,7 @@ MAX(
     , USERELATIONSHIP('Standard Calendar'[Date], Referral[Date Reported after 90d]) ) 
   , 0)
 ```
-The DAX measures for this chart are based on the number of aged referrals.  Aged referrals are those that are sent to a clinic and not rejected, canceled, or closed without being seen. The **# Aged** column is calculated for each referral record as a 1 or 0.  The **Date Reported after 90d** column places a referral in the reporting month in which it reaches 90 days of age.  Both of these columns are calculated in the Power Query load.    
+The DAX measures for this chart are based on the number of aged referrals.  Aged referrals are those that are sent to a clinic and not rejected, canceled, or closed without being seen. **# Aged** is calculated for each referral record as a 1 or 0.  The **Date Reported after 90d** column places a referral in the reporting month in which it reaches 90 days of age.  Both of these columns are calculated in the Power Query load.    
 
 ``` 
 Count Accepted after 90d = 
