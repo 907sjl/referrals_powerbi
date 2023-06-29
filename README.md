@@ -214,10 +214,40 @@ This visual includes all measures with an attribute value of **Sent** in the **M
 
 ### Process Rates After 90 Days 
 ![Bar chart and tables of process rates after 90 days](images/process_rates_90d.jpg)    
-
 The number of referrals that are sent to a clinic and kept are aged for process metrics.  This bar chart compares the number of referrals that have reached each of the process milestones 90 days after they are sent.    
 
-Rates matching the bar chart counts are listed to the right of the chart.  The number of aged referrals is the denominator for each of the process rates.  Aged referrals are those that are sent to a clinic and not rejected, canceled, or closed without being seen.    
+```
+Count Referrals after 90d = 
+MAX(
+  CALCULATE(SUM(Referral[# Aged]) 
+    , USERELATIONSHIP('Standard Calendar'[Date], Referral[Date Reported after 90d]) ) 
+  , 0)
+```
+The DAX measures for this chart are based on the number of aged referrals.  Aged referrals are those that are sent to a clinic and not rejected, canceled, or closed without being seen. The **# Aged** column is calculated for each referral record as a 1 or 0.  The **Date Reported after 90d** column places a referral in the reporting month in which it reaches 90 days of age.  Both of these columns are calculated in the Power Query load.    
+
+``` 
+Count Accepted after 90d = 
+CALCULATE([Count Referrals after 90d]
+  , KEEPFILTERS(Referral[# Accepted] > 0) )
+
+Count Scheduled after 90d = 
+CALCULATE([Count Referrals after 90d] 
+  , KEEPFILTERS(Referral[# Linked to Appts] > 0 || Referral[# Similar Appts Scheduled] > 0) )
+
+Count Completed after 90d = 
+MAX(
+  CALCULATE([Count Referrals after 90d]
+    , KEEPFILTERS(Referral[# Completed] > 0) )
+  , 0)
+```
+The remaining measures in the bar chart filter the **Count Referrals after 90d** measure to count referrals that have reached specific milestones, reached 90 days of age, and are considered aged referrals.    
+
+```
+Rate Accepted after 90d = DIVIDE([Count Accepted after 90d], [Count Referrals after 90d], 0)
+Rate Scheduled after 90d = DIVIDE([Count Scheduled after 90d], [Count Referrals after 90d], 0)
+Rate Seen after 90d = DIVIDE([Count Seen or Checked In after 90d], [Count Referrals after 90d], 0)
+```
+Rates matching the bar chart counts are listed to the right of the chart.  The number of aged referrals is the denominator for each of the process rates.  These measures build upon the previous count measures by dividing the milestone counts into the count of aged referrals.    
 
 Median times to reach each milestone include all aged referrals.  Referrals that have not reached the milestone yet are aged to the report date.    
 
