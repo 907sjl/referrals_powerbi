@@ -73,9 +73,6 @@ Adding calculated columns in Power Query balances out the overall time spent wai
 ![Referral table transforms #2](images/referral_steps_2.jpg)    
 The number of days between milestones are also added to the table as calculated columns.  These columns are used to age referrals from the date when they are sent.  These ages are used to calculate median process timings. 
 
-![Referral table transforms #3](images/referral_steps_3.jpg)    
-Along the lines of shifting work to the data refresh, the query calculates a set of extended date columns used by DAX measures in the report.  These date manipulations are present in most of the measures that are visualized.  There are useful functions and techniques in DAX to calculate time phased measures without these calculated date columns, but this would come at the cost of more complicated DAX measures and more processing when slicer values change or a new page is selected.    
-
 ### Processing Time Table  
 ![Processing Time query steps](images/processing_time_steps.jpg)    
 **Processing Time** is a pivoted transformation of the referral process metrics into a vertical fact table rather than a horizontal list of milestone attributes.  Doing so grants the ability to filter visuals on specific metrics and apply the same aggregation across one or more selected metrics.  Using this data structure also simplifies the use of bar charts to place different metrics side by side for comparison.    
@@ -96,7 +93,7 @@ Care has to be taken with this fact table because the days to each referral mile
 The query for the **Direct Secure Message** table loads records of messages to referral inboxes from DirectSecureMessages.csv.  The query simply loads the file, typecasts, and renames columns.  These records are used to evaluate how often referrals are used to acquire new patients versus direct messaging.   
 
 ### Standard Calendar Table 
-The query for the **Standard Calendar** table loads records of calendar dates and their pivotal attributes from StandardCalendar.csv.  This query simply loads the file and typecasts columns.  These records are used to create the date dimension for the report.  This dimension will play many roles in the data model.   
+The query for the **Standard Calendar** table loads records of calendar dates and their pivotal attributes from StandardCalendar.csv.  This query simply loads the file and typecasts columns.  These records are used to create the date dimension for the report.  This dimension can play different roles in the data model by associating it with different date attributes in DAX measures.   
 
 ### Dimension Tables 
 ![Contents of the dimensions group](images/dimensions_group.jpg)    
@@ -130,9 +127,9 @@ The **Age Category** dimension table has an added column with a pre-defined sort
 ![Clinic name slicer on report page](images/clinic_slicer.jpg)    
 This slicer is an example of filtering a dimension table versus an attribute of a table.  The **Clinic** dimension table has one-to-many relationships to both the **Referral** and **Direct Secure Message** tables.  If this slicer were connected to the Clinic column in either of those two tables it would only filter the records in the table that the slicer was connected to.  Connecting the slicer, or any filter, to the **Clinic** table filters both of the tables that it is related to.  Filtering the **Referral** table will also filter the **Processing Time** table by transition since **Referral** acts as a dimension in that relationship.    
 
-The **Standard Calendar** table is the time dimension.  It is a table of calendar dates and attributes such as year and month that are used to filter and sort visualizations by date.    
+The **Standard Calendar** table is the time dimension.  It is a table of calendar dates and attributes such as year and month that are used to filter and sort visualizations by date.  The time dimension can participate in multiple relationships to tables.  Each new relationship represents a role that dates play in measures.  The date when a referral is sent or the date when a referral is placed on hold, for example.  A single, more generalized date dimension creates a simpler data model compared to sub-classes of date dimensions for every role.  A single date slicer in a report filters measures by different dates using the USERELATIONSHIP function in DAX.  The report currently only uses a single dimension to each table but if the need arose it could be augmented with more relationships.    
 
-**Standard Calendar** participates in multiple relationships to both the **Referral** and **Direct Secure Message** tables.  Each of these relationships represents a role that dates play in measures.  The date when a referral is sent or the date when a referral is placed on hold, for example.  A single, more generalized date dimension creates a simpler data model compared to sub-classes of date dimensions for every role.  A single date slicer in a report filters measures by different dates using the USERELATIONSHIP function in DAX.    
+A time dimension table is also required to use the time intelligence functions in DAX.    
 
 ## Power BI Report
 
@@ -154,40 +151,31 @@ This horizontal bar chart represents the volume of referrals sent to a clinic al
 This visualization is built upon a few layers of DAX measures.  
 ```
 Count Sent after 90d = 
-  MAX(
-    CALCULATE(DISTINCTCOUNTNOBLANK(Referral[Referral ID])
-      , KEEPFILTERS(Referral[# Sent] > 0)
-      , USERELATIONSHIP('Standard Calendar'[Date], Referral[Date Reported after 90d]))
-    , 0)
+MAX(
+  CALCULATE(DISTINCTCOUNTNOBLANK(Referral[Referral ID])
+    , KEEPFILTERS(Referral[# Sent] > 0) 
+    , DATEADD('Standard Calendar'[Date], -90, DAY) )
+  , 0) 
 ```    
-The core layer calculates the number of referrals sent to the clinic that aged 90 days.  Two calculated columns from the Power Query assist with this measure.  **# Sent** is either 1 or 0 and sums to the number of referrals sent.  The **Date Reported after 90d** column adds 90 days to the date the referral was sent.  The DAX function DATEADD could also be used but at the expense of more frequent processing when each visualization is rendered.  The 90 day age is a static concept that is built into the report.    
+The core layer calculates the number of referrals sent to the clinic that aged 90 days.  A calculated column in Power Query assists with this measure.  **# Sent** is either 1 or 0 and sums to the number of referrals sent.  This is done to make data model easier to read and use.  The processing to calculate this column is shifted to the refresh of the data model.  The DAX function DATEADD is used to include referrals that reached 90 days of age during the month.    
 
 ```
 Count Canceled after 90d = 
-MAX(
-  CALCULATE([Count Sent after 90d] 
-    , KEEPFILTERS(Referral[Referral Status] IN {"Cancelled"})
-  ) 
-  , 0) 
+  CALCULATE([Count Sent after 90d]  
+    , KEEPFILTERS(Referral[Referral Status] IN {"Cancelled"}) ) 
 
 Count Rejected after 90d = 
-MAX(
   CALCULATE([Count Sent after 90d] 
-    , KEEPFILTERS(Referral[Referral Status] IN {"Rejected"})
-  ) 
-  , 0) 
+    , KEEPFILTERS(Referral[Referral Status] IN {"Rejected"}) )
 ```    
 The counts of canceled and rejected referrals build on to the **Count Sent after 90d** measure by adding filters to focus on those specific subsets of referrals that were sent.  The canceled and rejected referrals are highlighted here because they are not considered in the percentage of referrals seen.  It is possible to reach 100%.    
 
 ```
 Count Referrals Closed WBS after 90d = 
-MAX(
   CALCULATE([Count Sent after 90d] 
-    , KEEPFILTERS( Referral[Referral Status] IN {"Completed", "Closed"} 
-                   && ISBLANK(Referral[Date Referral Seen]) 
-                   && ISBLANK(Referral[Date Patient Checked In]))
-  ) 
-  , 0) 
+    , KEEPFILTERS(Referral[Referral Status] IN {"Completed", "Closed"} 
+        && ISBLANK(Referral[Date Referral Seen]) 
+        && ISBLANK(Referral[Date Patient Checked In]) ) )
 ```    
 Referrals are counted as closed without being seen if they are sent but then completed or closed without any data to indicate that the patient was seen.  These referrals are also removed from the percentages of referrals that are seen.    
 
@@ -220,10 +208,10 @@ Referrals are aged if they are sent to a clinic and kept.  Aged referrals are in
 Count Referrals after 90d = 
 MAX(
   CALCULATE(SUM(Referral[# Aged]) 
-    , USERELATIONSHIP('Standard Calendar'[Date], Referral[Date Reported after 90d]) ) 
+    , DATEADD('Standard Calendar'[Date], -90, DAY) ) 
   , 0)
 ```
-The DAX measures for this chart are based on the number of aged referrals.  Aged referrals are those that are sent to a clinic and not rejected, canceled, or closed without being seen. **# Aged** is calculated for each referral record as a 1 or 0.  The **Date Reported after 90d** column places a referral in the reporting month in which it reaches 90 days of age.  Both of these columns are calculated in the Power Query load.    
+The DAX measures for this chart are based on the number of aged referrals.  Aged referrals are those that are sent to a clinic and not rejected, canceled, or closed without being seen. **# Aged** is calculated for each referral record as a 1 or 0.  Similar to **# Sent**, this column is calculated in the Power Query load and is meant to make the data model easier to read and use.    
 
 ``` 
 Count Accepted after 90d = 
@@ -235,10 +223,8 @@ CALCULATE([Count Referrals after 90d]
   , KEEPFILTERS(Referral[# Linked to Appts] > 0 || Referral[# Similar Appts Scheduled] > 0) )
 
 Count Completed after 90d = 
-MAX(
-  CALCULATE([Count Referrals after 90d]
-    , KEEPFILTERS(Referral[# Completed] > 0) )
-  , 0)
+CALCULATE([Count Referrals after 90d]
+  , KEEPFILTERS(Referral[# Completed] > 0) )
 ```
 The remaining measures in the bar chart filter the **Count Referrals after 90d** measure to count referrals that have reached specific milestones, reached 90 days of age, and are considered aged referrals.    
 
