@@ -161,7 +161,7 @@ The core layer calculates the number of referrals sent to the clinic that aged 9
 
 The DAX function DATEADD is used to include referrals that reached 90 days of age during the month.  This works by filtering the **Standard Calendar** dimension to dates that are 90 days prior to each date in the currently selected month.  The month is selected in a slicer on the page.  DATEADD passes a table with those dates to the CALCULATE function as a filter.    
 ![Month slicer on report page](images/clinic_slicer.jpg)    
-The **Referral** table and the **Standard Calendar** table share a relationship on the date when the referral is sent to the clinic.  This results in filtering the referrals to those that were sent 90 days prior to a date in the selected month, or in other words referrals that reached 90 days of age in the current month.    
+The **Referral** table and the **Standard Calendar** table share a relationship on the date when the referral is sent to the clinic.  Filtering **Standard Calendar** also filters referrals to those that were sent 90 days prior to any date in the selected month.    
 
 ```
 Count Canceled after 90d = 
