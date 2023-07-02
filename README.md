@@ -161,7 +161,7 @@ The core layer calculates the number of referrals sent to the clinic that aged 9
 
 A slicer on the report page selects a single month at a time.  The DAX function DATEADD is used as a filter in this measure to include referrals that reached 90 days of age during the month.  This works by filtering the **Standard Calendar** dimension to dates that are 90 days prior to each date in the currently selected month.  DATEADD passes a table with those dates to the CALCULATE function as a filter.    
 ![Month slicer on report page](images/clinic_slicer.jpg)    
-The **Referral** table and the **Standard Calendar** table share a relationship on the date when the referral is sent to the clinic.  Filtering **Standard Calendar** also filters referrals to those that were sent 90 days prior to any date in the selected month.    
+The **Referral** table and the **Standard Calendar** table share a relationship on the date when the referral is sent to the clinic.  Filtering **Standard Calendar** also filters **Referral** to those that were sent 90 days prior to any date in the selected month.    
 
 ```
 Count Canceled after 90d = 
@@ -172,7 +172,7 @@ Count Rejected after 90d =
   CALCULATE([Count Sent after 90d] 
     , KEEPFILTERS(Referral[Referral Status] IN {"Rejected"}) )
 ```    
-The counts of canceled and rejected referrals build on to the **Count Sent after 90d** measure by adding filters to focus on those specific subsets of referrals that were sent.  The canceled and rejected referrals are highlighted here because they are not considered in the percentage of referrals seen.  It is possible to reach 100%.    
+The counts of canceled and rejected referrals build on to the **Count Sent after 90d** measure by adding filters to focus on those specific subsets of referrals that were sent.  The canceled and rejected referrals are highlighted in this visual because they are not included in the percentage of referrals seen.  This way it is possible to reach 100% of referrals seen.    
 
 ```
 Count Referrals Closed WBS after 90d = 
