@@ -157,7 +157,11 @@ MAX(
     , DATEADD('Standard Calendar'[Date], -90, DAY) )
   , 0) 
 ```    
-The core layer calculates the number of referrals sent to the clinic that aged 90 days.  A calculated column in Power Query assists with this measure.  **# Sent** is either 1 or 0 and sums to the number of referrals sent.  This is done to make data model easier to read and use.  The processing to calculate this column is shifted to the refresh of the data model.  The DAX function DATEADD is used to include referrals that reached 90 days of age during the month.    
+The core layer calculates the number of referrals sent to the clinic that aged 90 days.  The calculated column **# Sent** assists with this measure.  This column is either 1 or 0 for a single referral and sums to the number of referrals sent.  This column is created in the Power Query load to make the data model easier to read and use.    
+
+The DAX function DATEADD is used to include referrals that reached 90 days of age during the month.  This works by filtering the **Standard Calendar** table date dimension to dates that are 90 days prior to each date in the currently selected month in the report slicer, then passing a table of those dates to the CALCULATE function as a filter.    
+![Month slicer on report page](images/clinic_slicer.jpg)    
+The **Referral** table and the **Standard Calendar** table share a relationship on the date when the referral is sent to the clinic.  This results in filtering the referrals to those that were sent 90 days prior to a date in the selected month, or in other words referrals that reached 90 days of age in the current month.    
 
 ```
 Count Canceled after 90d = 
