@@ -269,7 +269,7 @@ Cumulative Referrals by Age to Milestone after 90d =
 CALCULATE([Count Referrals by Age to Milestone after 90d]
     , FILTER(ALL('Age Category'), 'Age Category'[SortOrder] <= MAX('Age Category'[SortOrder])) )  
 ```
-The line with the cumulative number of referrals seen across age categories builds upon the measure for the bars by using FILTER to forceably replace the grouping by age category with an aggregate over all age categories for this numerator calculation.  This measure plays on the fact that the current context in the visualization has an age category filter.  This measure replaces the visualization's group with a sum across all age categories that have a sort value less than the visualization's group.    
+The line with the cumulative number of referrals seen across age categories builds upon the measure for the bars using FILTER to forceably replace the grouping by age category with an aggregate over all age categories.  This measure plays on the fact that the current context in the visualization has an age category filter.  This measure replaces the visualization's group with a sum across all age categories that have a sort value less than the visualization's group.    
 
 The chart still calculates this measure for every age category group.  Each calculation includes the referrals in an age category prior to the current one.    
 
