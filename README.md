@@ -253,4 +253,31 @@ The median times to reach each milestone include all aged referrals.  Referrals 
 ![Chart of days to seen with distribution bins](images/days_to_seen_distro.jpg)    
 Distribution bins group referrals by the number of days to be seen.  This is accomplished via the relationship between **Processing Time** and the bin names in **Age Category**.  Any referrals not yet seen will be counted in the >90d category.    
 
+```
+Count Referrals by Age to Milestone after 90d = 
+MAX(
+  CALCULATE(
+    DISTINCTCOUNTNOBLANK('Processing Time'[Referral ID])
+    , KEEPFILTERS(Referral[# Aged] > 0) 
+    , DATEADD('Standard Calendar'[Date], -90, DAY) ) 
+  , 0)
+```    
+The bars visualize the measure **Count Referrals by Age to Milestone after 90d**.  The **Processing Time** table has a relationship to **Age Category** and so referrals that are aged must be counted from this table for the age bins.    
+
+```
+Cumulative Referrals by Age to Milestone after 90d = 
+CALCULATE([Count Referrals by Age to Milestone after 90d]
+    , FILTER(ALL('Age Category'), 'Age Category'[SortOrder] <= MAX('Age Category'[SortOrder])) )  
+```
+The line with the cumulative number of referrals seen across age categories builds upon the measure for the bars by using the FILTER function to forceably replace the grouping by age category with an aggregate over all age categories with a sorting attribute less than the current age category group.  This measure plays on the fact that the current context in the visualization has an age category to filter by.    
+
+```
+Cumulative Pct Referrals by Age to Milestone after 90d = 
+DIVIDE( 
+  'Processing Time'[Cumulative Referrals by Age to Milestone after 90d] 
+  , [Count Referrals after 90d]
+  , 0) 
+```
+Then the cumulative percentage is just the cumulative numerator divided into the count of all referrals that reached 90 days of age.    
+
 ### Display Folders for Data Elements
