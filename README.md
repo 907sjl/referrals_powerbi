@@ -249,7 +249,8 @@ MAX(
 ```    
 The median times to reach each milestone include all aged referrals.  Referrals that have not reached the milestone yet are aged to the report date.  The **Median Days to Milestone after 90d** measure calculates the median number of days to all milestones using the **Processing Time** table and by filtering the **Referral** table to the referrals that are aged and reached 90 days of age during the selected month.  **Referral** is a dimension table related to **Processing Time**.    
 
-![Milestone filter on visual](images/milestone_filter.jpg)    
-This measure must be filtered to a specific milestone.  That filter is attached to the visual.    
+### Days to Seen with Distribution
+![Chart of days to seen with distribution bins](images/days_to_seen_distro.jpg)    
+Distribution bins group referrals by the number of days to be seen.  This is accomplished via the relationship between **Processing Time** and the bin names in **Age Category**.  Any referrals not yet seen will be counted in the >90d category.    
 
 ### Display Folders for Data Elements
