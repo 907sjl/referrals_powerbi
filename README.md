@@ -239,6 +239,17 @@ Rate Seen after 90d = DIVIDE([Count Seen or Checked In after 90d], [Count Referr
 ```
 Rates matching the bar chart counts are listed to the right of the chart.  The number of aged referrals is the denominator for each of the process rates.  These measures build upon the previous count measures by dividing the milestone counts into the count of aged referrals.    
 
-Median times to reach each milestone include all aged referrals.  Referrals that have not reached the milestone yet are aged to the report date.    
+```
+Median Days to Milestone after 90d = 
+MAX(
+  CALCULATE(MEDIAN('Processing Time'[Days to Milestone]) 
+      , KEEPFILTERS(Referral[# Aged] > 0) 
+      , DATEADD('Standard Calendar'[Date], -90, DAY) )
+  , 0) 
+```    
+The median times to reach each milestone include all aged referrals.  Referrals that have not reached the milestone yet are aged to the report date.  The **Median Days to Milestone after 90d** measure calculates the median number of days to all milestones using the **Processing Time** table and by filtering the **Referral** table to the referrals that are aged and reached 90 days of age during the selected month.  **Referral** is a dimension table related to **Processing Time**.    
+
+![Milestone filter on visual](images/milestone_filter.jpg)    
+This measure must be filtered to a specific milestone.  That filter is attached to the visual.    
 
 ### Display Folders for Data Elements
