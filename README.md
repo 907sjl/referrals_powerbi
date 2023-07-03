@@ -318,7 +318,7 @@ MAX(
     , DATEADD('Standard Calendar'[Date], -30, DAY) )
   , 0)
 ```    
-**Count Routine Referrals after 30d** is the denominator of the rate.  This measure calculates the number of referrals aged that were sent 30 days before any day in the currently selected month.  It also filters to referrals having a routine priority as opposed to urgent.    
+**Count Routine Referrals after 30d** is the denominator of the rate.  This measure calculates the number of referrals that were sent 30 days before any day in the currently selected month.  The referrals must aged, meaning they are not canceled, rejected, or closed without being seen.  It also filters to referrals having a routine priority as opposed to urgent.    
 
 ```
 Count Routine Seen after 30d = 
@@ -329,7 +329,7 @@ Count Routine Seen in 30d =
 CALCULATE([Count Routine Seen after 30d]
     , KEEPFILTERS(Referral[Days until Patient Seen]<31) ) 
 ```    
-The numerator is the number of referrals seen in 30 days.  Two measures build upon the denominator.  **Count Routine Seen after 30d** filters the referrals to those that were seen and is used to calculate the percentage of referrals seen after 30 days.  **Count Routine Seen in 30d** filters the referrals seen to those that were specifically seen 30 days or less after they were sent.    
+The numerator is the number of referrals seen in 30 days.  Two measures filter the denominator measure to calculate the numerator.  **Count Routine Seen after 30d** filters the referrals to those that were seen and is used to calculate the percentage of referrals seen after 30 days.  **Count Routine Seen in 30d** filters the referrals seen to those that were specifically seen 30 days or less after they were sent.    
 
 ```
 Rate Routine Seen in 30d = 
@@ -338,6 +338,6 @@ DIVIDE(
   , [Count Routine Referrals after 30d] 
   , 0 ) 
 ```    
-Then the rate is the count of referrals seen in 30 days divided into the referrals that have reached 30 days of age and were not rejected, canceled, or closed without being seen.    
+Then the metric is the count of referrals seen in 30 days divided into the referrals that have reached 30 days of age and were not rejected, canceled, or closed without being seen.    
 
 ### Display Folders for Data Elements
