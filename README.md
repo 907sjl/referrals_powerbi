@@ -306,4 +306,38 @@ DIVIDE(
 ```
 Then the cumulative percentage is just the cumulative numerator divided into the count of all referrals that reached 90 days of age.    
 
+### Routine Referrals Seen in 30 Days    
+![Gauge of routine referrals seen in 30d vs target rate](images/routine_in_30d.jpg)    
+The percentage of referrals seen in 30 days is a patient access metric.  These are the referrals that have reached 30 days of age in the selected month and were seen in that time.  The rate of referrals seen in 30 days is visualized with a gauge that has a setpoint for the target rate.    
+
+```
+Count Routine Referrals after 30d = 
+MAX(
+  CALCULATE(SUM(Referral[# Aged]) 
+    , KEEPFILTERS(Referral[Referral Priority] = "Routine")
+    , DATEADD('Standard Calendar'[Date], -30, DAY) )
+  , 0)
+```    
+**Count Routine Referrals after 30d** is the denominator of the rate.  This measure calculates the number of referrals aged that were sent 30 days before any day in the currently selected month.  It also filters to referrals having a routine priority as opposed to urgent.    
+
+```
+Count Routine Seen after 30d = 
+CALCULATE([Count Routine Referrals after 30d]
+    , KEEPFILTERS(Referral[# Seen or Checked In] > 0) ) 
+
+Count Routine Seen in 30d = 
+CALCULATE([Count Routine Seen after 30d]
+    , KEEPFILTERS(Referral[Days until Patient Seen]<31) ) 
+```    
+The numerator is the number of referrals seen in 30 days.  Two measures build upon the denominator.  **Count Routine Seen after 30d** filters the referrals to those that were seen and is used to calculate the percentage of referrals seen after 30 days.  **Count Routine Seen in 30d** filters the referrals seen to those that were specifically seen 30 days or less after they were sent.    
+
+```
+Rate Routine Seen in 30d = 
+DIVIDE(
+  [Count Routine Seen in 30d]
+  , [Count Routine Referrals after 30d] 
+  , 0 ) 
+```    
+Then the rate is the count of referrals seen in 30 days divided into the referrals that have reached 30 days of age and were not rejected, canceled, or closed without being seen.    
+
 ### Display Folders for Data Elements
