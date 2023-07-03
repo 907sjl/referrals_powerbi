@@ -251,7 +251,7 @@ The median times to reach each milestone include all aged referrals.  Referrals 
 
 ### Rate Seen, Waiting, or Unmet    
 ![Pie chart of referrals seen, waiting, or unmet](images/rate_seen_or_waiting.jpg)    
-After 90 days the number of referrals seen, those waiting for their appointment date, and those not yet scheduled are displayed in a pie chart.  Any referrals not scheduled after 90 days are labeled as unmet.    
+After 90 days the number of referrals seen, those waiting for their appointment date, and those not yet scheduled are displayed with their relative proportions in a pie chart.  Any referrals not scheduled after 90 days are labeled as unmet.    
 
 ```
 Count Seen or Checked In after 90d = 
@@ -266,7 +266,7 @@ CALCULATE([Count Referrals after 90d]
 Count Referrals Unmet after 90d = 
   [Count Referrals after 90d] - [Count Seen or Checked In after 90d] - [Count Referrals Waiting after 90d] 
 ```    
-These measures all build upon the count of referrals aged after 90 days.  The count unmet is the count of all referrals aged without those seen or waiting for a scheduled appointment.    
+These measures all build upon the count of referrals aged after 90 days.  An unmet referral is one that is neither seen nor scheduled for an appointment after 90 days.    
 
 ```
 Rate Seen after 90d = DIVIDE([Count Seen or Checked In after 90d], [Count Referrals after 90d], 0)
