@@ -249,6 +249,30 @@ MAX(
 ```    
 The median times to reach each milestone include all aged referrals.  Referrals that have not reached the milestone yet are aged to the report date.  The **Median Days to Milestone after 90d** measure calculates the median number of days to all milestones using the **Processing Time** table and by filtering the **Referral** table to the referrals that are aged and reached 90 days of age during the selected month.  **Referral** is a dimension table related to **Processing Time**.    
 
+### Rate Seen, Waiting, or Unmet    
+![Pie chart of referrals seen, waiting, or unmet](images/rate_seen_or_waiting.jpg)    
+After 90 days the number of referrals seen, those waiting for their appointment date, and those not yet scheduled are displayed in a pie chart.  Any referrals not scheduled after 90 days are labeled as unmet.    
+
+```
+Count Seen or Checked In after 90d = 
+  CALCULATE([Count Referrals after 90d] 
+    , KEEPFILTERS(Referral[# Seen or Checked In] > 0) ) 
+
+Count Referrals Waiting after 90d = 
+CALCULATE([Count Referrals after 90d] 
+    , KEEPFILTERS(Referral[# Seen or Checked In] == 0) 
+    , KEEPFILTERS(Referral[# Linked to Appts] > 0 || Referral[# Similar Appts Scheduled] > 0) )
+
+Count Referrals Unmet after 90d = 
+  [Count Referrals after 90d] - [Count Seen or Checked In after 90d] - [Count Referrals Waiting after 90d] 
+```    
+These measures all build upon the count of referrals aged after 90 days.  The count unmet is the count of all referrals aged without those seen or waiting for a scheduled appointment.    
+
+```
+Rate Seen after 90d = DIVIDE([Count Seen or Checked In after 90d], [Count Referrals after 90d], 0)
+```    
+The percentage of referrals seen after 90 days is the count of referrals seen divided into the count of all referrals aged after 90 days.    
+
 ### Days to Seen with Distribution
 ![Chart of days to seen with distribution bins](images/days_to_seen_distro.jpg)    
 Distribution bins group referrals by the number of days to be seen.  This is accomplished via the relationship between **Processing Time** and the bin names in **Age Category**.  Any referrals not yet seen will be counted in the >90d category.    
