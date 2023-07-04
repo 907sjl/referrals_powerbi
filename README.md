@@ -340,4 +340,46 @@ DIVIDE(
 ```    
 Then the metric is the count of referrals seen in 30 days divided into the referrals that have reached 30 days of age and were not rejected, canceled, or closed without being seen.    
 
+![Rate vs target rate over time](images/over_under_target.jpg)    
+A table to the right of the metric displays a comparison of historical average rates against the target rate.  Up or down indicators help to visualize the comparisons at a glance.  The numerical value are the difference between the historical rates and the target rate.    
+
+```
+Count Routine after 30d 12-Mths = 
+MAX(
+  CALCULATE(SUM(Referral[# Aged]) 
+    , KEEPFILTERS(Referral[Referral Priority] = "Routine")
+    , FILTER(ALL('Standard Calendar'[Date])
+        , 'Standard Calendar'[Date] >= MINX('Standard Calendar'
+                                        , DATEADD(DATEADD('Standard Calendar'[Date], -11, MONTH), -30, DAY))
+          && 'Standard Calendar'[Date] <= MAXX('Standard Calendar'
+                                            , DATEADD('Standard Calendar'[Date], -30, DAY)) ) 
+  )
+  , 0)
+```    
+Customized date criteria is used to create the historical average rates for the previous 12 months and the previous three months.  The customization has two goals, to include referrals as of the previous 12 monthly periods and to include referrals that reached 30 days of age in each of those months.    
+
+The FILTER function forcefully overrides any other filters on **Standard Calendar** and the ALL function includes all records in this filter regardless of the slicer selection.  Because FILTER is used instead of KEEPFILTERS this measure will not cooperate with date criteria in other measures.  This measure stands alone without building upon other measures even if they are similar.    
+
+Nested DATEADD functions play on the fact that a slicer is selecting a date context for the report.  They first roll back the selected dates by 11 months and then roll those dates back 30 days to reflect the dates that would be used to measure referrals 11 months prior.  DATEADD creates a table of dates to be used as a filter.  Then MINX, a table aggregate, is applied to every date in that table result to find the earliest date to use for this measure.    
+
+```
+Count Routine Seen in 30d 12-Mths = 
+CALCULATE([Count Routine after 30d 12-Mths]
+    , KEEPFILTERS(Referral[Days until Patient Seen]<31) ) 
+
+Rate Routine Seen in 30d 12-Mths = 
+DIVIDE(
+  [Count Routine Seen in 30d 12-Mths]
+  , [Count Routine after 30d 12-Mths] 
+  , 0 ) 
+```    
+With the **Count Routine after 30d 12-Mths** measure as the denominator of the 12 month rate, the numerator can build upon that measure to select only the referrals that were specifically seen within 30 day from when they were sent.    
+
+```
+Target Routine Seen in 30d = 0.5
+
+Performance Variance Routine Seen in 30d 12-Mths = [Rate Routine Seen in 30d 12-Mths] - [Target Routine Seen in 30d]
+```    
+There are only two target rates in this report.  A DAX measure **Target Routine Seen in 30d** serves as a global constant with the target rate for this metric.  In a more complicated scenario a table of targets would be used instead.    
+
 ### Display Folders for Data Elements
