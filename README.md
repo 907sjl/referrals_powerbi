@@ -341,7 +341,7 @@ DIVIDE(
 Then the metric is the count of referrals seen in 30 days divided into the referrals that have reached 30 days of age and were not rejected, canceled, or closed without being seen.    
 
 ![Rate vs target rate over time](images/over_under_target.jpg)    
-A table to the right of the metric displays a comparison of historical average rates against the target rate.  Up or down indicators help to visualize the comparisons at a glance.  The numerical value are the difference between the historical rates and the target rate.    
+A table to the right of the metric displays a comparison of historical average rates against the target rate.  Up or down indicators help to visualize the comparisons at a glance.  The numerical values are the difference between the historical rates and the target rate.    
 
 ```
 Count Routine after 30d 12-Mths = 
@@ -356,7 +356,7 @@ MAX(
   )
   , 0)
 ```    
-Customized date criteria is used to create the historical average rates for the previous 12 months and the previous three months.  The customization has two goals, to include referrals as of the previous 12 monthly periods and to include referrals that reached 30 days of age in each of those months.    
+Customized date criteria is used to create the historical average rates for the previous 12 months and the previous three months.  The customized criteria in this measure has two goals, to include referrals as of the previous 12 monthly periods and to include referrals that reached 30 days of age in each of those months.    
 
 The FILTER function forcefully overrides any other filters on **Standard Calendar** and the ALL function includes all records in this filter regardless of the slicer selection.  Because FILTER is used instead of KEEPFILTERS this measure will not cooperate with date criteria in other measures.  This measure stands alone without building upon other measures even if they are similar.    
 
@@ -373,7 +373,7 @@ DIVIDE(
   , [Count Routine after 30d 12-Mths] 
   , 0 ) 
 ```    
-With the **Count Routine after 30d 12-Mths** measure as the denominator of the 12 month rate, the numerator can build upon that measure to select only the referrals that were specifically seen within 30 day from when they were sent.    
+With the **Count Routine after 30d 12-Mths** measure as the denominator of the 12 month rate, the numerator can build upon that measure to select only the referrals that were specifically seen within 30 days from when the referrals was sent.    
 
 ```
 Target Routine Seen in 30d = 0.5
@@ -381,5 +381,13 @@ Target Routine Seen in 30d = 0.5
 Performance Variance Routine Seen in 30d 12-Mths = [Rate Routine Seen in 30d 12-Mths] - [Target Routine Seen in 30d]
 ```    
 There are only two target rates in this report.  A DAX measure **Target Routine Seen in 30d** serves as a global constant with the target rate for this metric.  In a more complicated scenario a table of targets would be used instead.    
+
+```
+Performance Direction Routine Seen in 30d 12-Mths = 
+  if([Performance Variance Routine Seen in 30d 12-Mths] > 0, "▲"
+    , if([Performance Variance Routine Seen in 30d 12-Mths] < 0, "▼"
+      , "-"))
+```    
+The up or down indicator is provided by a DAX function attached to a card visual.  ASCII has characters representing triangles in both orientations.  A standard color rule is assigned to the card visual based on the value of the variance between the metric and the target.    
 
 ### Display Folders for Data Elements
