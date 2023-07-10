@@ -391,7 +391,7 @@ Performance Direction Routine Seen in 30d 12-Mths =
 The up or down indicator is provided by a DAX function attached to a card visual.  ASCII has characters representing triangles in both orientations.  A standard color rule is assigned to the card visual based on the value of the variance between the metric and the target.    
 
 ### Improvement Direction 
-![Process improvement categories](images/improvement_categories.jpg)    
+![Process improvement categories](images/performance_categories.jpg)    
 Two tables provide a consolidated and concise interpretation of the referral throughput metrics for routine referrals seen in 30 days and urgent referrals seen in five days.  The up or down indicators described above are also shown in this table for each clinic with a categorical summary.  The category name is a single data point that summarizes the clinic's current performance over the previous 12 months.    
 
 There are two groups of indicators and categories.  The first is the performance versus the target rate for the current month, previous three months, and the previous 12 months.  Three direction indicators are grouped from left-to-right for these time periods and indicate if the aggregate rate for each time period is above or below the target rate.  The category name to the right of those indicators describes the overall 12 month performance qualitatively.    
@@ -435,9 +435,9 @@ Improvement Score Routine Seen in 30d 12-Mths =
 ```    
 The improvement score is calculated by comparing the variances between the current month rate to the previous month rate, the current month rate to the three month rate, and the three month rate to the 12-month rate.    
 
-The performance score is similar except the the current rate, three month rate, and 12-month rate are each compared against the target rate for the metric.    
+The performance score is calculated in a similar manner except that the current rate, three month rate, and 12-month rate are each compared against the target rate for the metric.    
 
 ![Process improvement by time period](images/improvement_by_period.jpg)    
-Each of the individual rates can be seen on the more detailed measurement page for each clinic next to the gauge with the current month's rate.    
+Each of the individual rates and direction indicators that are being compared are visible on the page for each clinic next to the gauge with the current month's rate.    
 
 ### Display Folders for Data Elements
