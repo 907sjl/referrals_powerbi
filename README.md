@@ -392,11 +392,21 @@ The up or down indicator is provided by a DAX function attached to a card visual
 
 ### Improvement Direction 
 ![Process improvement categories](images/performance_categories.jpg)    
-Two tables provide a consolidated and concise interpretation of the referral throughput metrics for routine referrals seen in 30 days and urgent referrals seen in five days.  The up or down indicators described above are also shown in this table for each clinic with a categorical summary.  The category name is a single data point that summarizes the clinic's current performance over the previous 12 months.    
+Two tables provide a consolidated and concise interpretation of the referral throughput metrics over 12 months for routine referrals seen in 30 days and urgent referrals seen in five days.    
 
-There are two groups of indicators and categories.  The first is the performance versus the target rate for the current month, previous three months, and the previous 12 months.  Three direction indicators are grouped from left-to-right for these time periods and indicate if the aggregate rate for each time period is above or below the target rate.  The category name to the right of those indicators describes the overall 12 month performance qualitatively.    
+There are two groups of indicators and categories.  The first group of columns compares the performance to the target rate for three time periods:
+- The current month rate over or under the target rate,
+- The aggregate three month rate over or under the target rate, 
+- The aggregate 12-month rate over or under the target rate.    
 
-The second group of columns describe the improvement direction of each clinic compared to the previous month, three months, and the previous 12 months.  These direction indicators display the relative position of the current month's rate versus the previous month, the current month's rate versus the aggregate rate over three months, and the relative position of the three month aggregate rate versus the 12 month aggregate rate.  The category name to the right describes the overall 12 month improvement in qualitative terms.    
+Three direction indicators are grouped from left-to-right for these time periods.  The category name to the right of those indicators describes the overall 12 month performance qualitatively.    
+
+The second group of columns describe the improvement direction of each clinic across three time periods:
+- The current month rate compared to the previous month, 
+- The current month rate compared to the aggregate three month rate, 
+- The aggregate three month rate compared to the aggregate 12-month rate.    
+
+The category name to the right describes the overall 12 month improvement direction in qualitative terms.    
 
 ```
 Improvement Category Routine Seen in 30d = 
