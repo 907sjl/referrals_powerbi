@@ -1,0 +1,38 @@
+Provider Referred To,Location Referred To,Clinic,Organization Referred To,count
+"Referral, XYZA Allergy",XYZA Immunology Clinic,Immunology,Specialty XYZA,3941
+"Referral, XYZA Immunology",XYZA Immunology,Immunology,Specialty XYZA,10083
+"Referral, XYZA Antenatal Testing",XYZA Maternal Fetal Medicine,Maternal Fetal Medicine,Specialty XYZA,2465
+"Referral, XYZA Audiology",XYZA Audiology,Audiology,Specialty XYZA,4449
+"Referral, XYZA Bariatrics",XYZA Internal Medicine,Internal Medicine,Specialty XYZA,2
+"Referral, XYZA Cardiology",XYZA Cardiology,Cardiology,Specialty XYZA,18670
+"Referral, XYZA Dermatology",XYZA Dermatology,Dermatology,Specialty XYZA,9320
+"Referral, XYZA ENT",XYZA ENT,Otolaryngology,Specialty XYZA,18689
+"Referral, XYZA Endocrinology",XYZA Endocrinology,Endocrinology,Specialty XYZA,2677
+"Referral, XYZA Gastroenterology",XYZA Gastroenterology,Gastroenterology,Specialty XYZA,7853
+"Referral, XYZA Gynecologic Oncology",XYZA Gynecologic Oncology,Oncology,Specialty XYZA,350
+"Referral, XYZA Hematology",XYZA Oncology,Oncology,Specialty XYZA,1457
+"Referral, XYZA Hepatology",XYZA Hepatitis,Hepatology,Specialty XYZA,4646
+"Referral, XYZA Infectious Disease",XYZA Internal Medicine,Internal Medicine,Specialty XYZA,1258
+"Referral, XYZA Internal Med",XYZA Internal Medicine,Internal Medicine,Specialty XYZA,6873
+"Referral, XYZA Internal Medicine",XYZA Internal Medicine,Internal Medicine,Specialty XYZA,24761
+"Referral, XYZA Internal Medicine PreOp Evaluation",XYZA Internal Medicine,Internal Medicine,Specialty XYZA,1570
+"Referral, XYZA Maternal Fetal Medicine MFM",XYZA Maternal Fetal Medicine,Maternal Fetal Medicine,Specialty XYZA,5659
+"Referral, XYZA Nephrology",XYZA Nephrology,Nephrology,Specialty XYZA,2200
+"Referral, XYZA Neurology",XYZA Neurology,Neurology,Specialty XYZA,8635
+"Referral, XYZA Neurosurgery",XYZA Neurosurgery,Neurosurgery,Specialty XYZA,4513
+"Referral, XYZA Neurotesting (XYZA Use Only)",XYZA Neuro Testing Clinic,Neurology,Specialty XYZA,261
+"Referral, XYZA Oncology",XYZA Oncology,Oncology,Specialty XYZA,2356
+"Referral, XYZA Oncology Nurse Navigator",XYZA Oncology Nurse Clinic,Oncology,Specialty XYZA,623
+"Referral, XYZA Ophthalmology",XYZA Ophthalmology,Ophthalmology,Specialty XYZA,13907
+"Referral, XYZA Ortho Teleradiology",XYZA Orthopedics,Orthopedics,Specialty XYZA,48
+"Referral, XYZA Orthopedics",XYZA Orthopedics,Orthopedics,Specialty XYZA,27355
+"Referral, XYZA Outpatient Nutrition (for Non-Whoville patients)",XYZA Oncology,Oncology,Specialty XYZA,212
+"Referral, XYZA PFT Lab (XYZA Use Only)",XYZA PFT Lab,Pulmonology,Specialty XYZA,2818
+"Referral, XYZA Pain Management",XYZA Comprehensive Pain Management Center,Pain Management,Specialty XYZA,5434
+"Referral, XYZA Physical Med & Rehab",XYZA Physical Medicine and Rehabilitation,Orthopedics,Specialty XYZA,116
+"Referral, XYZA Podiatry",XYZA Podiatry,Podiatry,Specialty XYZA,6167
+"Referral, XYZA Pulmonology (Not Sleep Lab)",XYZA Pulmonology,Pulmonology,Specialty XYZA,5050
+"Referral, XYZA Pulmonology Lung Cancer Screening",XYZA Pulmonology,Pulmonology,Specialty XYZA,1034
+"Referral, XYZA Rheumatology",XYZA Rheumatology,Rheumatology,Specialty XYZA,3656
+"Referral, XYZA Sleep Lab",XYZA Sleep Disorders Laboratory,Sleep Disorders Laboratory,Specialty XYZA,6590
+"Referral, XYZA Urology",XYZA Urology,Urology,Specialty XYZA,9474
