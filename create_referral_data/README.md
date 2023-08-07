@@ -1,4 +1,4 @@
-< [Portfolio](https://907sjl.github.io) | [Full Report](https://907sjl.github.io/pdf/Referral%20Wait%20Time.pdf) | [Overview](https://907sjl.github.io/referrals_powerbi/referrals_report) 
+< [Portfolio](https://907sjl.github.io) | [Full Report](https://907sjl.github.io/pdf/Referral%20Wait%20Time.pdf) | [Power BI example](https://907sjl.github.io/referrals_powerbi/) 
 
 ## About  
 This script was used to generate referrals data for the report of referrals volume and throughput for specialty clinics.  This report is one example of my work.    
@@ -28,4 +28,4 @@ A handful of reference tables in csv files are imported into the script using Pa
 - source_locations.csv
 : Contains one row for each location that can send referrals.    
 
-< [Portfolio](https://907sjl.github.io) | [Full Report](https://907sjl.github.io/pdf/Referral%20Wait%20Time.pdf) | [Overview](https://907sjl.github.io/referrals_powerbi/referrals_report) 
+< [Portfolio](https://907sjl.github.io) | [Full Report](https://907sjl.github.io/pdf/Referral%20Wait%20Time.pdf) | [Power BI example](https://907sjl.github.io/referrals_powerbi/) 
