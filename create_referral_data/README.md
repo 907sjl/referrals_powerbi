@@ -3,7 +3,7 @@
 ## About  
 This script was used to generate referrals data for the report of referrals volume and throughput for specialty clinics.  This report is one example of my work.    
 
-I used Python to create a simple script style program that exports a comma separated variable (csv) file of referrals and the dates when each referral met processing milestones.    
+I used Python to create a simple script-style program that randomly generates a set of referral processing data.  A random number of referrals are created for each date, to randomly selected clinics and from randomly selected sources.  The dates when each referral reaches processing milestones are then randomly selected.  The result is a comma separated variable (csv) file of referrals and the dates when each referral met processing milestones.    
 
 The output file of referral data becomes a data source for the report.  
 
