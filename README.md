@@ -450,4 +450,39 @@ The performance score is calculated in a similar manner except that the current 
 ![Process improvement by time period](images/improvement_by_period.jpg)    
 Each of the individual rates and direction indicators that are being compared are visible on the page for each clinic next to the gauge with the current month's rate.    
 
+### Data Driven Colors 
+![Chart of days to seen with distribution bins](images/days_to_seen_distro.jpg)    
+Bar chart visuals provide a way to color the bars using data driven functions.  The function can be used in a ladder of rules that are configured in the visual.  If you plan to use the same rules in more than one column or visual this creates redundant work to set up and maintain the rules.    
+
+```
+Color by Category = SWITCH(
+  MAX('Age Category'[Age Category]) 
+  , "7d", [Color 7d] 
+  , "14d", [Color 14d] 
+  , "30d", [Color 30d] 
+  , "60d", [Color 60d] 
+  , "90d", [Color 90d] 
+  , ">90d", [Color Over 90d] 
+) 
+
+Color by Days until Scheduled = SWITCH(
+  TRUE() 
+  , ([Median Days until Scheduled after 90d] < 8.0), [Color 7d] 
+  , ([Median Days until Scheduled after 90d] >= 8.0) && ([Median Days until Scheduled after 90d] < 15.0), [Color 14d] 
+  , ([Median Days until Scheduled after 90d] >= 15.0) && ([Median Days until Scheduled after 90d] < 31.0), [Color 30d] 
+  , ([Median Days until Scheduled after 90d] >= 31.0) && ([Median Days until Scheduled after 90d] < 61.0), [Color 60d] 
+  , ([Median Days until Scheduled after 90d] >= 61.0) && ([Median Days until Scheduled after 90d] < 91.0), [Color 90d] 
+  , ([Median Days until Scheduled after 90d] >= 91.0), [Color Over 90d] 
+)
+```    
+This report uses DAX functions to encapsulate the rules and return a single color value to a chart instead.    
+
+```
+Color 7d = "#55BCFF"
+Color 14d = "#AADAFF"
+... 
+Color Over 90d = "#FD6262"
+```    
+The specific color values are held in individual DAX functions that function as constants, pairing a color value with a meaning.  Color values can be changed across multiple functions that use them.    
+
 ### Display Folders for Data Elements
