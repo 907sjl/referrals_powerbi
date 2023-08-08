@@ -1,17 +1,25 @@
 < [Portfolio](https://907sjl.github.io) | [Full Report](https://907sjl.github.io/pdf/Referral%20Wait%20Time.pdf) | [Power BI example](https://907sjl.github.io/referrals_powerbi/) 
 
 ## About  
-This script was used to generate referrals data for the report of referrals volume and throughput for specialty clinics.  This report is one example of my work.    
+This folder contains two scripts that were used to generate referrals data for the report of referrals volume and throughput for specialty clinics.  This report is one example of my work.    
 
-I used Python to create a simple script-style program that randomly generates a set of referral processing data.  A random number of referrals are created for each date, to randomly selected clinics and from randomly selected sources.  The dates when each referral reaches processing milestones are then randomly selected.  The result is a comma separated variable (csv) file of referrals and the dates when each referral met processing milestones.    
+I used Python to create simple script-style programs that randomly generate referral processing data.  
+- create_referral_data.py
+: This script creates a random number of referrals for every calendar day between two dates.  The referrals are sent to randomly selected clinics from randomly selected sources.  The dates when each referral reaches processing milestones are then randomly selected.  The result is a comma separated variable (csv) file of referrals and the dates when each referral met processing milestones.    
 
-The output file of referral data becomes a data source for the report.  
+- create_dsm_data.py
+: This script creates receipt data for a random number of dsm messages for every calendar day between two dates.  A random number of these messages are for patients with referrals that were tracker with the clinic referral management system.    
+
+Both scripts export their data to Comma Separated Variable (csv) files.  The output files become data sources for the report.  
 
 ## Reference Tables 
-A handful of reference tables in csv files are imported into the script using Pandas.  Items are selected from the reference tables at random for each referral record in the resulting output file.    
+A handful of reference tables in csv files are imported into the scripts using Pandas.  Items are selected from the reference tables at random to create each record in the resulting output files.    
 
 - assigned_personnel.csv
 : Contains one row for each personnel who can be assigned to follow-up on a referral.    
+
+- dsm_sender_category.csv
+: Contains one row for each grouping of direct secure message senders based on their organization.    
 
 - last_referral_update_by.csv
 : Contains one row for each personnel who can update referrals.    
