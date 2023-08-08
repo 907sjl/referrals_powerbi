@@ -5,10 +5,10 @@ This folder contains two scripts that were used to generate referrals data for t
 
 I used Python to create simple script-style programs that randomly generate referral processing data.  
 - create_referral_data.py
-: This script creates a random number of referrals for every calendar day between two dates.  The referrals are sent to randomly selected clinics from randomly selected sources.  The dates when each referral reaches processing milestones are then randomly selected.  The result is a comma separated variable (csv) file of referrals and the dates when each referral met processing milestones.    
+: This script creates a random number of referrals for every calendar day between two dates.  The referrals are sent to randomly selected clinics from randomly selected sources.  The dates when each referral reaches processing milestones are then randomly selected.  The result is a data set of referrals and the dates when each referral met processing milestones.    
 
 - create_dsm_data.py
-: This script creates receipt data for a random number of dsm messages for every calendar day between two dates.  A random number of these messages are for patients with referrals that were tracker with the clinic referral management system.    
+: This script creates receipt data for a random number of dsm messages for every calendar day between two dates.  A random number of these messages are for patients with referrals that were tracked with the clinic referral management system.    
 
 Both scripts export their data to Comma Separated Variable (csv) files.  The output files become data sources for the report.  
 
