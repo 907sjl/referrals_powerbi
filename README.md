@@ -486,3 +486,5 @@ Color Over 90d = "#FD6262"
 The specific color values are held in individual DAX measures that function as constants, pairing a color value with a meaning.  Color values can be changed at once across multiple sets of rules that use them.    
 
 ### Display Folders for Data Elements
+![List of display folders](images/display_folders.jpg)    
+This report resulted in a large collection of measures with different inclusion criteria that build upon one another.  They are organized into display folders as are the table attributes.  The measures are organized by the time frame of the inclusion criteria.    
