@@ -452,7 +452,7 @@ Each of the individual rates and direction indicators that are being compared ar
 
 ### Data Driven Colors 
 ![Chart of days to seen with distribution bins](images/days_to_seen_distro.jpg)    
-Bar chart visuals provide a way to color the bars using data driven functions.  The function can be used in a ladder of rules that are configured in the visual.  If you plan to use the same rules in more than one column or visual this creates redundant work to set up and maintain the rules.    
+Bar chart visuals provide a way to color the bars using measures.  Measures can be used with a ladder of rules that are configured in the visual and select colors based on the measure's value.  If you plan to use the same rules in more than one column or visual this creates redundant work to set up and maintain the rules.    
 
 ```
 Color by Category = SWITCH(
@@ -475,7 +475,7 @@ Color by Days until Scheduled = SWITCH(
   , ([Median Days until Scheduled after 90d] >= 91.0), [Color Over 90d] 
 )
 ```    
-This report uses DAX functions to encapsulate the rules and return a single color value to a chart instead.    
+This report uses DAX measures to encapsulate the rules and return a single color value to a chart instead.    
 
 ```
 Color 7d = "#55BCFF"
@@ -483,6 +483,6 @@ Color 14d = "#AADAFF"
 ... 
 Color Over 90d = "#FD6262"
 ```    
-The specific color values are held in individual DAX functions that function as constants, pairing a color value with a meaning.  Color values can be changed across multiple functions that use them.    
+The specific color values are held in individual DAX measures that function as constants, pairing a color value with a meaning.  Color values can be changed at once across multiple sets of rules that use them.    
 
 ### Display Folders for Data Elements
