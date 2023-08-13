@@ -483,7 +483,11 @@ Color 14d = "#AADAFF"
 ... 
 Color Over 90d = "#FD6262"
 ```    
-The specific color values are held in individual DAX measures that function as constants, pairing a color value with a meaning.  Color values can be changed at once across multiple sets of rules that use them.    
+The specific color values are held in individual DAX measures that function as constants, pairing a color value with a meaning.  Color values can be changed at once across multiple sets of rules that use the colors in multiple visuals.    
+
+This report uses colors to create a heat map style gradient based on the number of days that a referral aged before the patient was seen.  Ages are grouped into distribution bins, and each bin has a color along the gradient based on the number of days relative to other bins.  The color values in this example were chosen so that the color of each bin is distinctive for those with one of the three most common color sight variances in addition to those with normal color sight.  The most effective change is to replace green with blue.    
+
+The constant color measures allow colors to be changed in this way across the report.  Power BI doesn't allow all color properties to be data driven with measures unfortunately.  Older tools like QlikView were more customizable in this way.  Hopefully Microsoft will come around to creating more measure hooks for configuration properties.    
 
 ### Display Folders for Data Elements
 ![List of display folders](images/display_folders.jpg)    
