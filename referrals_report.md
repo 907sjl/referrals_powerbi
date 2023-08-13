@@ -1,4 +1,4 @@
-< [Back to Power BI example](https://907sjl.github.io/referrals_powerbi/) | [Full Report](/pdf/Referral%20Process%20Measures.pdf) | [Portfolio](/) 
+< [Back to Power BI example](https://907sjl.github.io/referrals_powerbi/) | [Full Report](/pdf/Referral%20Process%20Measures.pdf) | [PBIX File on GitHub](https://github.com/907sjl/referrals_powerbi/blob/main/Referral%20Process%20Measures.pbix) | [Portfolio](/)    
 
 ## Specialty clinic process rates
 
@@ -51,4 +51,8 @@ The process timing measures consider a referral scheduled if either the referral
 
 An additional test compares the number of patients referenced in Direct Secure Messages to those who have a referral to the clinic. Patients seen as a result of DSMs would need a referral if they are to be included in this report.  
 
-< [Back to Power BI example](https://907sjl.github.io/referrals_powerbi/) | [Full Report](/pdf/Referral%20Process%20Measures.pdf) | [Portfolio](/) 
+< [Back to Power BI example](https://907sjl.github.io/referrals_powerbi/) | [Full Report](/pdf/Referral%20Process%20Measures.pdf) | [PBIX File on GitHub](https://github.com/907sjl/referrals_powerbi/blob/main/Referral%20Process%20Measures.pbix) | [Portfolio](/)    
+
+
+<p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
+<!-- Remove above link if you don't want to attibute -->
