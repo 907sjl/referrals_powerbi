@@ -1,4 +1,4 @@
-< [Portfolio](https://907sjl.github.io) | [Full Report](https://907sjl.github.io/pdf/Referral%20Process%20Measures.pdf) | [PBIX File on GitHub](https://github.com/907sjl/referrals_powerbi/blob/main/Referral%20Process%20Measures.pbix) | [Overview](https://907sjl.github.io/referrals_powerbi/referrals_report) 
+< [Portfolio](https://907sjl.github.io) | [Full Report](https://907sjl.github.io/pdf/Referral%20Process%20Measures.pdf) | [PBIX File on GitHub](https://github.com/907sjl/referrals_powerbi/blob/main/Referral%20Process%20Measures.pbix) | [Overview](https://907sjl.github.io/referrals_powerbi/referrals_report)    
 
 One way to measure access to care is timeliness.  Long delays to see a healthcare provider can speak to availability issues, either a lack of resources or inefficiencies that result in a less than optimal conversion of referrals into appointments. Long delays can also speak to accomodation issues or accessibility issues if patients have difficulty attending their scheduled appointments.
 This project is an example of a report that I created to look at the process times for referred patients at specialty clinics. 
@@ -493,7 +493,9 @@ The constant color measures allow colors to be changed in this way across the re
 ![List of display folders](images/display_folders.jpg)    
 This report resulted in a large collection of measures with different inclusion criteria that build upon one another.  They are organized into display folders as are the table attributes.  The measures are organized by the referral priority and the time frame of the inclusion criteria.  This lines up with the process aims and measures for referral throughput.    
 
-< [Portfolio](https://907sjl.github.io) | [Full Report](https://907sjl.github.io/pdf/Referral%20Process%20Measures.pdf) | [PBIX File on GitHub](https://github.com/907sjl/referrals_powerbi/blob/main/Referral%20Process%20Measures.pbix) | [Overview](https://907sjl.github.io/referrals_powerbi/referrals_report) 
 ---
 <p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
 <!-- Remove above link if you don't want to attibute -->
+
+< [Portfolio](https://907sjl.github.io) | [Full Report](https://907sjl.github.io/pdf/Referral%20Process%20Measures.pdf) | [PBIX File on GitHub](https://github.com/907sjl/referrals_powerbi/blob/main/Referral%20Process%20Measures.pbix) | [Overview](https://907sjl.github.io/referrals_powerbi/referrals_report)    
+
