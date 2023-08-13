@@ -491,4 +491,4 @@ The constant color measures allow colors to be changed in this way across the re
 
 ### Display Folders for Data Elements
 ![List of display folders](images/display_folders.jpg)    
-This report resulted in a large collection of measures with different inclusion criteria that build upon one another.  They are organized into display folders as are the table attributes.  The measures are organized by the time frame of the inclusion criteria.    
+This report resulted in a large collection of measures with different inclusion criteria that build upon one another.  They are organized into display folders as are the table attributes.  The measures are organized by the referral priority and the time frame of the inclusion criteria.  This lines up with the process aims and measures for referral throughput.    
