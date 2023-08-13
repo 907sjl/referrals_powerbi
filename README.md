@@ -448,7 +448,7 @@ The improvement score is calculated by comparing the variances between the curre
 The performance score is calculated in a similar manner except that the current rate, three month rate, and 12-month rate are each compared against the target rate for the metric.    
 
 ![Process improvement by time period](images/improvement_by_period.jpg)    
-Each of the individual rates and direction indicators that are being compared are visible on the page for each clinic next to the gauge with the current month's rate.    
+A page for each clinic shows the individual rates that are being compared next to the gauge with the current month's rate.    
 
 ### Data Driven Colors 
 ![Chart of days to seen with distribution bins](images/days_to_seen_distro.jpg)    
