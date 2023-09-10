@@ -356,7 +356,7 @@ MAX(
 ```    
 Customized date criteria is used to create the historical average rates for the previous 12 months and the previous three months.  The customized criteria in this measure has two goals, to include referrals as of the previous 12 monthly periods and to include referrals that reached 30 days of age in each of those months.    
 
-The DATESBETWEEN function overrides any other filters on the **Date** column of **Standard Calendar** with a table of dates to include records in the calculation of the measure.  This measure will not cooperate with date criteria in other measures.  This measure stands alone without building upon other measures even if they are similar because of the custom date filter.    
+The DATESBETWEEN function overrides any other filters on the **Date** column of **Standard Calendar** with a table of dates used to include records in the measure.  This measure will not cooperate with date criteria in other measures.  This measure stands alone without building upon other measures even if they are similar because of the custom date filter.    
 
 Nested DATEADD functions play on the fact that a slicer is selecting a date context for the report.  They first roll back the selected dates by 11 months and then roll those dates back 30 days to reflect the dates that would be used to measure 30 day old referrals 11 months prior.  DATEADD creates a table of dates to be used as a filter.  Then MINX, a table aggregate, is applied to every date in that table result to find the earliest date to use for this measure.    
 
