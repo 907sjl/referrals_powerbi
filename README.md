@@ -348,19 +348,17 @@ Count Routine after 30d 12-Mths =
 MAX(
   CALCULATE(SUM(Referral[# Aged]) 
     , KEEPFILTERS(Referral[Referral Priority] = "Routine")
-    , FILTER(ALL('Standard Calendar'[Date])
-        , 'Standard Calendar'[Date] >= MINX('Standard Calendar'
-                                        , DATEADD(DATEADD('Standard Calendar'[Date], -11, MONTH), -30, DAY))
-          && 'Standard Calendar'[Date] <= MAXX('Standard Calendar'
-                                            , DATEADD('Standard Calendar'[Date], -30, DAY)) ) 
-  )
+      /* Filter reporting date values allowed to those within 12 months of the external date range filter */ 
+    , DATESBETWEEN('Standard Calendar'[Date]
+                   , minx(dateadd(dateadd('Standard Calendar'[Date], -11, month), -30, DAY), 'Standard Calendar'[Date])
+                   , maxx(dateadd('Standard Calendar'[Date], -30, DAY), 'Standard Calendar'[Date]) ) )
   , 0)
 ```    
 Customized date criteria is used to create the historical average rates for the previous 12 months and the previous three months.  The customized criteria in this measure has two goals, to include referrals as of the previous 12 monthly periods and to include referrals that reached 30 days of age in each of those months.    
 
-The FILTER function forcefully overrides any other filters on **Standard Calendar** and the ALL function includes all records in this filter regardless of the slicer selection.  Because FILTER is used instead of KEEPFILTERS this measure will not cooperate with date criteria in other measures.  This measure stands alone without building upon other measures even if they are similar.    
+The DATESBETWEEN function overrides any other filters on the **Date** column of **Standard Calendar** with a table of dates to include records in the calculation of the measure.  This measure will not cooperate with date criteria in other measures.  This measure stands alone without building upon other measures even if they are similar because of the custom date filter.    
 
-Nested DATEADD functions play on the fact that a slicer is selecting a date context for the report.  They first roll back the selected dates by 11 months and then roll those dates back 30 days to reflect the dates that would be used to measure referrals 11 months prior.  DATEADD creates a table of dates to be used as a filter.  Then MINX, a table aggregate, is applied to every date in that table result to find the earliest date to use for this measure.    
+Nested DATEADD functions play on the fact that a slicer is selecting a date context for the report.  They first roll back the selected dates by 11 months and then roll those dates back 30 days to reflect the dates that would be used to measure 30 day old referrals 11 months prior.  DATEADD creates a table of dates to be used as a filter.  Then MINX, a table aggregate, is applied to every date in that table result to find the earliest date to use for this measure.    
 
 ```
 Count Routine Seen in 30d 12-Mths = 
