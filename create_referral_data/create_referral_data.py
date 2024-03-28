@@ -85,7 +85,7 @@ data_parameters = {
   'pending_reschedule_rate': 0.16,
   'pending_reschedule_weights': [0.2, 0.23, 0.28, 0.4, 0.71, 1],
   'closed_rate': 0.05,
-  'earlier_appt_weights': [0.0, 0.03, 0.1, 0.2, 0.3, 0.6]
+  'earlier_appt_weights': [0.1, 0.2, 0.4, 0.6, 0.8, 0.9]
 }
 
 # Bins of maximum days to reach process milestones 
@@ -220,26 +220,26 @@ def get_earlier_date(weights_parameter: list[float],
     return_test = False
     if days_to_seen <= 7.0:
         if chance <= weights_parameter[0]:
-            delay = delay_factor * 7.0
+            delay = delay_factor * 1.0
             return_test = True
     elif days_to_seen <= 14.0:
         if chance < weights_parameter[1]:
-            delay = delay_factor * 14.0
+            delay = delay_factor * 3.0
             return_test = True
     elif days_to_seen <= 30.0:
         if chance < weights_parameter[2]:
-            delay = delay_factor * 30.0
+            delay = delay_factor * 12.0
             return_test = True
     elif days_to_seen <= 60.0:
         if chance < weights_parameter[3]:
-            delay = delay_factor * 60.0
+            delay = delay_factor * 22.0
             return_test = True
     elif days_to_seen <= 90.0:
         if chance < weights_parameter[4]:
-            delay = delay_factor * 90.0
+            delay = delay_factor * 50.0
             return_test = True
     elif chance < weights_parameter[5]:
-        delay = delay_factor * days_to_seen
+        delay = delay_factor * 80.0
         return_test = True
 
     if return_test:
@@ -403,16 +403,22 @@ while referral_date <= data_parameters['last_referral_date']:
         # Also randomly choose earlier appt times for referrals that were seen
         delayed = False
         earlier_date_str = ''
+        date1 = datetime(2100, 12, 31)
+        date2 = datetime(2100, 12, 31)
+        if seen == 1:
+            date1 = seen_date
+        if similar_seen == 1:
+            date2 = similar_seen_date
+        either_date = min(date1, date2)
         if (seen == 0) and (similar_seen == 0):
             completed_date, completed_date_str, completed = (
                 get_referral_date(1,
                                   'not_seen_completed_rate',
                                   rate_adjustment,
                                   'not_seen_completed_weights',
-                                  referral_written_date,
+                                  referral_date,
                                   referral_priority_val))
         else:
-            either_date = max(similar_seen_date, seen_date)
             completed_date, completed_date_str, completed = (
                 get_referral_date(1,
                                   'seen_completed_rate',
@@ -422,7 +428,7 @@ while referral_date <= data_parameters['last_referral_date']:
                                   referral_priority_val))
             earlier_date, earlier_date_str, delayed = (
                 get_earlier_date(data_parameters['earlier_appt_weights'], referral_date, either_date))
-        earlier_date_str = earlier_date_str if delayed else seen_date_str
+            earlier_date_str = earlier_date_str if delayed else either_date.strftime("%m/%d/%Y")
 
         # Choose a random last update date after the latest process date
         latest_date = max(completed_date,
